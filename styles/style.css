@@ -1,0 +1,298 @@
+body > section{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1500px;
+	height: 1000px;
+}
+
+header {
+  background-image: url("../images/bioRelai.png");
+  background-size: 1500px;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+
+nav .btnConnexion, .btnDeconnexion{
+	font-size: 30px;
+	font-family: helvetica;
+	position: absolute;
+    bottom: 0px;
+  	right: 10px;
+}
+
+.btnConnexion ul , .btnDeconnexion ul{
+	display: block;
+	list-style-type: none;
+}
+
+.btnConnexion li ,  .btnDeconnexion li{
+	display: inline-block;
+}
+
+.btnConnexion li a , .btnDeconnexion li a{
+	display: table-cell;
+	color: #ffffff;
+  	font-weight: bold;
+  	text-decoration: none;
+  	width: 200px;
+  	height: 60px;
+  	vertical-align: middle;
+  	text-align: center;
+  	background-color: #708c29;
+}
+
+.producteurs {
+	width: 1400px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Helvetica; 
+}
+
+.producteurs .titreListe {
+	font-size: 50px;
+	margin-bottom: 30px;
+}
+
+.producteurs .item {
+	margin-top: 20px;
+	font-size: 20px
+}
+
+
+.producteurs .item .photo{
+	display: inline-block;
+	width: 300px;
+	text-align: center;
+}
+
+.producteurs .item .texte{
+	display: inline-block;
+	width: 1050px;
+}
+
+.producteurs .item .texte .titre{
+	font-size: 30px;
+	Font-Weight: Bold;
+}
+
+.producteurs .item .texte .titre span{
+	padding-right: 20px; 
+}
+
+.producteurs .item .texte .descriptif{
+	text-align: justify;
+	padding-top: 30px;
+	
+}
+
+.producteurs .item .texte .produitsProposes{
+	margin-top: 20px;
+	text-align: right;	
+	Font-Weight: Bold;
+}
+
+.hidden {
+   display: none;
+}
+
+
+.producteurs .item .btnProduits {
+   color: #ffffff;
+   background-color: #beb91d;
+   height: 40px;
+   font-size: 20px;
+   Font-Weight: Bold;
+}
+
+
+/*
+Formulaire de connexion
+*/
+
+.formulaireConnexion , .formulaireInscription{
+	
+	width: 600px;
+	border: solid black 2px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 25px;
+	font-family: helvetica;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: gray;
+}
+
+.formulaireConnexion h1 , .formulaireInscription h1{
+	color: black;
+}
+
+
+.formulaireConnexion .ligne , .formulaireInscription .ligne {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.formulaireConnexion input[type='text'] , .formulaireConnexion input[type='password']  , .formulaireInscription input[type='text'] , .formulaireInscription input[type='password'] {
+	width: 100%;
+	height: 40px;
+	font-size: 25px;
+	font-family: helvetica;
+}
+
+.formulaireConnexion input[type='submit'] , .formulaireInscription input[type='submit']{
+	width: 100%;
+	height: 60px;
+	font-size: 25px;
+	font-family: helvetica;
+	background-color: #beb91d;
+	font-weight: bold;
+	margin-top: 30px
+}
+
+
+
+.demandeInscription{
+	display: inline-block;;
+	padding: 0px;
+	width: 50%;
+}
+
+.demandeInscription ul{
+	display: inline-block;
+	list-style-type: none;
+}
+
+
+
+.demandeInscription li{
+	display: inline-block;	
+}
+
+
+.demandeInscription li a{
+  	font-weight: bold;
+  	text-decoration: none;
+  	color: gray;
+}
+
+
+.fermerConnexion{
+	display: inline-block;;
+	list-style-type: none;
+	width: 50%;	
+	text-align: right;
+}
+
+
+.fermerConnexion ul{
+	display: inline-block;;
+	list-style-type: none;
+}
+
+
+.fermerConnexion li{
+	display: inline-block;
+}
+
+
+.fermerConnexion img{
+	width: 40px;
+}
+
+.menuBioRelai{
+	font-size: 25px;
+	font-family: helvetica;
+	position: absolute;
+    bottom: 0px;
+  	right: 10px;
+}
+
+
+.menuBioRelai ul {
+	display: table;
+	border-collapse: separate;
+    border-spacing: 20px 20px;
+    border: 1px solid grey;
+	list-style-type: none;
+}
+
+.menuBioRelai li {
+	display: table-cell;
+  	font-weight: bold;
+  	text-decoration: none;
+  	width: 200px;
+  	height: 60px;
+  	vertical-align: middle;
+  	text-align: center;
+  	background-color: #708c29;
+  	margin-left: 20px;
+}
+
+.menuBioRelai li.actif {
+	background-color: #508a39;
+	color: #b08a39;	
+}
+
+
+.menuBioRelai li a {
+	color: #ffffff;
+  	font-weight: bold;
+  	text-decoration: none;
+  	width: 200px;
+  	height: 60px;
+}
+
+.menuBioRelai li a:hover {
+	color: #000000;	
+}
+
+#gaucheAchats{
+	display: inline-block;
+	width: 20%;
+	background-color: #ffe25a;
+}
+
+#droiteAchats{
+	display: inline-block;
+	width: 79%;
+}
+
+.menuCategories{
+	font-size: 20px;
+	font-family: helvetica;
+	list-style-type: none;
+}
+
+
+.menuCategories li {
+  	font-weight: bold;
+  	width: 200px;
+  	height: 40px;
+  	margin-left: 20px;
+}
+
+.menuCategories li.actif {
+	color: #b08a39;	
+}
+
+
+.menuCategories li a {
+	color: #ffffff;
+  	font-weight: bold;
+  	text-decoration: none;
+  	width: 200px;
+  	height: 60px;
+}
+
+.menuCategories li a:hover {
+	color: #000000;	
+}
+
+.item{
+	display: inline-block;
+	width: 20%;
+	background-color: #ffe25a;
+	border: 1px solid black ;
+}

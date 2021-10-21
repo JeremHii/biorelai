@@ -1,0 +1,3 @@
+<nav>
+    <?=$bioRelaiMP->afficherMenu()?>
+</nav>
