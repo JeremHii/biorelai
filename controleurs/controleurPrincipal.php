@@ -1,4 +1,5 @@
 <?php
+//Commentaire
 $messageErreurConnexion = '';
 
 $page=(isset($_GET["page"])) ? $_GET["page"] : "visiteurs";
