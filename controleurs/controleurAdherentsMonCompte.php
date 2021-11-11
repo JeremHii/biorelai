@@ -1,7 +1,11 @@
 <?php
 if(isset($user) && $user->getFonction() == "ADH"){
+    $messagePrevention = "Après avoir changé vos informations vous devez vous reconnecter";
 
     $formulaireModif = new Formulaire('post', '?page=AdherentsMonCompteModif', 'fMonCompte', 'fMonCompte');
+
+    $formulaireModif->ajouterComposantLigne($formulaireModif->creerMessageAvecId($messagePrevention, "prevention"));
+    $formulaireModif->ajouterComposantTab();
 
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputHidden('id', 'id', $user->getId(), 0, '', ''));
     $formulaireModif->ajouterComposantTab();
@@ -10,20 +14,12 @@ if(isset($user) && $user->getFonction() == "ADH"){
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('mail', 'mail', $user->getMail(), 0, '', ''));
     $formulaireModif->ajouterComposantTab();
 
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre mot de passe :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputMdp('mdp', 'mdp',  0, '*************', ''));
-    $formulaireModif->ajouterComposantTab();
-
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Confirmez votre mot de passe :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputMdp('cmdp', 'cmdp',  0, '*************', ''));
-    $formulaireModif->ajouterComposantTab();
-
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre Nom :'));
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('nom', 'nom', $user->getNom(), 0,'', ''));
     $formulaireModif->ajouterComposantTab();
     
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre prenom :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('nom', 'nom', $user->getPrenom(), 0,'', ''));
+    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('prenom', 'prenom', $user->getPrenom(), 0,'', ''));
     $formulaireModif->ajouterComposantTab();
 
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre adresse :'));
@@ -50,7 +46,19 @@ if(isset($user) && $user->getFonction() == "ADH"){
 
     $formulaireModif->creerFormulaire();
 
+    $formulaireModifCompteMdp = new Formulaire('post', '?page=AdherentsMonCompteMDP', 'fMonCompte', 'fMonCompte');
+
+    $formulaireModifCompteMdp->ajouterComposantLigne($formulaireModifCompteMdp-> creerInputSubmit('submitModifmdp', 'submitModifmdp', 'Modifier votre mot de passe'));
+    $formulaireModifCompteMdp->ajouterComposantTab();
+
+    $formulaireModifCompteMdp->creerFormulaire();
+
+    $messagePreventionSupp = "Attention la suppression du compte est définitive, impossible de revenir en arrière";
+
     $formulaireSupp = new Formulaire('post', '?page=AdherentsSuppMonCompte', 'fMonCompte', 'fMonCompte');
+
+    $formulaireSupp->ajouterComposantLigne($formulaireSupp->creerMessageAvecId($messagePreventionSupp, "prevention"));
+    $formulaireSupp->ajouterComposantTab();
 
     $formulaireSupp->ajouterComposantLigne($formulaireSupp-> creerInputSubmit('submitSupp', 'submitSupp', 'Supprimer votre compte'));
     $formulaireSupp->ajouterComposantTab();

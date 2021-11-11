@@ -45,6 +45,11 @@ class Formulaire{
 		$composant = "<label class='message'>" . $unMessage . "</label>";
 		return $composant;
 	}
+
+	public function creerMessageAvecId($unMessage, $nnId){
+		$composant = "<label class='message' id=". $nnId .">" . $unMessage . "</label>";
+		return $composant;
+	}
 	
 	
 	public function creerInputTexte($unNom, $unId, $uneValue , $required , $placeholder , $pattern){

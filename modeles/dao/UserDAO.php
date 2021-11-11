@@ -66,7 +66,7 @@ class UserDAO{
         $req->bindParam(':idUser', $idUser);
     }
 
-    public static function SuppIntervenants($idUser){
+    public static function SuppUtilisateur($idUser){
         $db = Db::getDb();
         $req = $db->prepare("
         DELETE FROM utilisateur
@@ -76,13 +76,39 @@ class UserDAO{
         $req->execute();
     }
 
-    public static function SuppProducteur($idUser){
+    public static function changeMdp($idUser, $mdp){
         $db = Db::getDb();
         $req = $db->prepare("
-        DELETE FROM utilisateur
-        WHERE id=:id
+        UPDATE utilisateur 
+        SET mdp=:mdp
+        WHERE id=:id;
         ");
         $req->bindParam(':id', $idUser);
+        $req->bindParam(':mdp', $mdp);
+        $req->execute();
+    }
+
+    public static function changeModif($idUser, $mail, $nom, $prenom, $adresse, $ville, $cp, $desc){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        UPDATE utilisateur 
+        SET mail=:mail,
+            nom=:nom, 
+            prenom=:prenom,
+            adresse=:adresse,
+            ville=:ville,
+            cp=:cp,
+            descriptif=:desc
+        WHERE id=:id;
+        ");
+        $req->bindParam(':id', $idUser);
+        $req->bindParam(':mail', $mail);
+        $req->bindParam(':nom', $nom);
+        $req->bindParam(':prenom', $prenom);
+        $req->bindParam(':adresse', $adresse);
+        $req->bindParam(':ville', $ville);
+        $req->bindParam(':cp', $cp);
+        $req->bindParam(':desc', $desc);
         $req->execute();
     }
 }
