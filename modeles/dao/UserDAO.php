@@ -66,6 +66,24 @@ class UserDAO{
         $req->bindParam(':idUser', $idUser);
     }
 
+    //Récupère tout les intervenants si ils ont le statut de bénévole ou salarié
+    public static function getUsers(){
+        $requetePrepa = Db::getDb()->prepare("select id, nom, prenom from utilisateur where fonction = 'PRD'");
+        $requetePrepa->execute();
+        $requeteUser = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+
+        return $requeteUser;
+    }
+
+    //Récupère les informations de l'utilisateur sélectionné
+    public static function getUserById($id){
+        $requetePrepa = DB::getDb()->prepare("select id, mail, adresse, descriptif, cp, ville, nom, prenom, fonction from utilisateur where id = ?");
+        $requetePrepa->execute(array($id));
+        $requeteUser = $requetePrepa->fetch(PDO::FETCH_ASSOC);
+
+        return $requeteUser;
+    }
+
     public static function SuppIntervenants($idUser){
         $db = Db::getDb();
         $req = $db->prepare("
