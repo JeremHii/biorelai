@@ -33,4 +33,10 @@ class ResponsableDAO{
         $requetePrepa->bindParam(":id",$id);
         $requetePrepa->execute();
     }
+
+    //Permet de supprimer l'utilisateur choisi
+    public static function deleteUser($id){
+        $requetePrepa = DB::getDb()->prepare("delete from utilisateur where id = ?");
+        $requetePrepa->execute(array($id));
+    }
 }

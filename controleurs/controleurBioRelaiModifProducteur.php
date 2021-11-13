@@ -9,7 +9,7 @@ if(isset($_POST["mail"]) && isset($_POST["adresse"]) && isset($_POST["descriptif
     $user = ResponsableDAO::getUserById($_GET["producteur"]);
 }
 
-$formulaireInfos = new Formulaire('post', '#', 'fPRD', 'fPRD'); //Création d'un nouveau formulaire
+$formulaireInfos = new Formulaire('post', '?page=BioRelaiProducteurs', 'fPRD', 'fPRD'); //Création d'un nouveau formulaire
 $formulaireInfos->ajouterComposantLigne($formulaireInfos->creerLabel('Mail :'));
 $formulaireInfos->ajouterComposantLigne($formulaireInfos->creerInputTexte('mail', 'mail', $user["mail"], 1, '', '')); //Affichage du nom de l'utilisateur
 $formulaireInfos->ajouterComposantTab();
