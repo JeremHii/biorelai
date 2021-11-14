@@ -16,7 +16,7 @@ if(isset($user) && $user->getFonction() == "RES"){
         }
     }
     else{
-        $messageErreurConnexion = "test";
+        $messageErreurConnexion = "";
     }
 
 

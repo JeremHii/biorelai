@@ -1,6 +1,14 @@
 <?php
 class ResponsableDAO{
 
+    public static function getFonctions(){
+        $requetePrepa = Db::getDb()->prepare("select code, libelle from fonction");
+        $requetePrepa->execute();
+        $requeteUser = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+
+        return $requeteUser;
+    }
+
     //Récupère tout les intervenants si ils ont le mdp de bénévole ou salarié
     public static function getUsers(){
         $requetePrepa = Db::getDb()->prepare("select id, nom, prenom from utilisateur where fonction = 'PRD'");
@@ -33,10 +41,12 @@ class ResponsableDAO{
         $requetePrepa->bindParam(":id",$id);
         $requetePrepa->execute();
     }
-
+    
     //Permet de supprimer l'utilisateur choisi
     public static function deleteUser($id){
         $requetePrepa = DB::getDb()->prepare("delete from utilisateur where id = ?");
         $requetePrepa->execute(array($id));
     }
+
+
 }
