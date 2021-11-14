@@ -21,4 +21,12 @@ class ProduitDAO{
             $produit->getId()
         ));
     }
+
+    public static function deleteProduit(ProduitDTO $produit){
+        $db = Db::getDb();
+        $req = $db->prepare("DELETE FROM produit WHERE id = ?");
+        $req->execute(array(
+            $produit->getId()
+        ));
+    }
 }

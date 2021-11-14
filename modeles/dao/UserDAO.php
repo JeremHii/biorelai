@@ -55,34 +55,28 @@ class UserDAO{
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function changeMail($idUser , $mail){
+    public static function updateUser(UserDTO $user){
         $db = Db::getDb();
-        $req = $db->prepare("
-        UPDATE utilisateur
-        SET mail=:mail
-        WHERE id=:idUser
-        ");
-        $req->bindParam(':mail', $mail);
-        $req->bindParam(':idUser', $idUser);
+        $req = $db->prepare("UPDATE utilisateur SET mail = ?, adresse = ?, descriptif = ?, cp = ?, ville = ?, nom = ?, prenom = ?, fonction = ? WHERE id = ?");
+        $req->execute(array(
+            $user->getMail(),
+            $user->getAdresse(),
+            $user->getDescriptif(),
+            $user->getCp(),
+            $user->getVille(),
+            $user->getNom(),
+            $user->getPrenom(),
+            $user->getFonction(),
+            $user->getId()
+        ));
     }
 
-    public static function SuppIntervenants($idUser){
+    public static function updateUserPass(UserDTO $user, $pass){
         $db = Db::getDb();
-        $req = $db->prepare("
-        DELETE FROM utilisateur
-        WHERE id=:id
-        ");
-        $req->bindParam(':id', $idUser);
-        $req->execute();
-    }
-
-    public static function SuppProducteur($idUser){
-        $db = Db::getDb();
-        $req = $db->prepare("
-        DELETE FROM utilisateur
-        WHERE id=:id
-        ");
-        $req->bindParam(':id', $idUser);
-        $req->execute();
+        $req = $db->prepare("UPDATE utilisateur SET mdp = md5(?) WHERE id = ?");
+        $req->execute(array(
+            $pass,
+            $user->getId()
+        ));
     }
 }
