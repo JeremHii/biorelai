@@ -23,7 +23,7 @@ class ProduitDTO{
         ProduitDTO::$produits = $produits;
     }
 
-    public static function getProduit($id) : ProduitDTO{
+    public static function getProduit($id){
         foreach(ProduitDTO::$produits as $produit){
             if($produit->id == $id){
                 return $produit;

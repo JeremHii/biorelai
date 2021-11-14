@@ -17,7 +17,7 @@
 			</main>
 
 			<footer>
-				Footer
+				<!--Footer-->
 			</footer>
 		</section>
 	</body>
