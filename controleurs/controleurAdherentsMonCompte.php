@@ -34,10 +34,6 @@ if(isset($user) && $user->getFonction() == "ADH"){
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('cp', 'cp', $user->getCp(), 0,'', ''));
     $formulaireModif->ajouterComposantTab();
 
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre descriptif :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('desc', 'desc', $user->getDescriptif(), 0,'', ''));
-    $formulaireModif->ajouterComposantTab();
-
     $formulaireModif->ajouterComposantLigne($formulaireModif-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
     $formulaireModif->ajouterComposantTab();
 

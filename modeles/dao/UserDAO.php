@@ -24,16 +24,15 @@ class UserDAO{
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function createUser($mail, $mdp, $adresse, $descriptif, $cp, $ville, $nom, $prenom, $fonction="ADH"){
+    public static function createUser($mail, $mdp, $adresse, $cp, $ville, $nom, $prenom, $fonction="ADH"){
         $db = Db::getDb();
         $req = $db->prepare("
-        INSERT INTO utilisateur(mail, mdp, adresse, descriptif, cp, ville, nom, prenom, fonction)
-        VALUES (:mail, :mdp, :adresse, :descriptif, :cp, :ville, :nom, :prenom, :fonction);
+        INSERT INTO utilisateur(mail, mdp, adresse, cp, ville, nom, prenom, fonction)
+        VALUES (:mail, :mdp, :adresse, :cp, :ville, :nom, :prenom, :fonction);
         ");
         $req->bindParam(':mail', $mail);
         $req->bindParam(':mdp', $mdp);
         $req->bindParam(':adresse', $adresse);
-        $req->bindParam(':descriptif', $descriptif);
         $req->bindParam(':cp', $cp);
         $req->bindParam(':ville', $ville);
         $req->bindParam(':nom', $nom);
@@ -88,7 +87,7 @@ class UserDAO{
         $req->execute();
     }
 
-    public static function changeModif($idUser, $mail, $nom, $prenom, $adresse, $ville, $cp, $desc){
+    public static function changeModif($idUser, $mail, $nom, $prenom, $adresse, $ville, $cp){
         $db = Db::getDb();
         $req = $db->prepare("
         UPDATE utilisateur 
@@ -98,7 +97,6 @@ class UserDAO{
             adresse=:adresse,
             ville=:ville,
             cp=:cp,
-            descriptif=:desc
         WHERE id=:id;
         ");
         $req->bindParam(':id', $idUser);
@@ -108,7 +106,18 @@ class UserDAO{
         $req->bindParam(':adresse', $adresse);
         $req->bindParam(':ville', $ville);
         $req->bindParam(':cp', $cp);
-        $req->bindParam(':desc', $desc);
         $req->execute();
     }
+
+    public static function getFactures(){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        SELECT date, facturesPDF
+        FROM commande
+        ");
+        $req->execute();
+        
+        return $req->fetchAll();
+    }
+
 }

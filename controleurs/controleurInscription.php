@@ -2,14 +2,14 @@
 
 //On vérifie tout un tas de condition et on créer inscrit l'utilisateur
 if(!isset($user)){
-    if(isset($_POST['mail']) || isset($_POST['mdp']) || isset($_POST['Cmdp']) || isset($_POST['adresse']) || isset($_POST['desc']) || isset($_POST['cp']) || isset($_POST['nom']) || isset($_POST['prenom'])){
+    if(isset($_POST['mail']) || isset($_POST['mdp']) || isset($_POST['Cmdp']) || isset($_POST['adresse']) || isset($_POST['cp']) || isset($_POST['nom']) || isset($_POST['prenom'])){
         if(isset($_POST['mail']) && isset($_POST['mdp']) && isset($_POST['Cmdp']) && isset($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['mail']) && !empty($_POST['mdp']) && !empty($_POST['Cmdp']) && !empty($_POST['nom']) && !empty($_POST['prenom']))
         {   
             if($_POST['mdp'] == $_POST['Cmdp'])
             {
                 if(UserDAO::userExists($_POST['mail']))
                 {
-                    UserDAO::createUser($_POST['mail'], md5($_POST['mdp']), $_POST['adresse'], $_POST['desc'], $_POST['cp'], $_POST['ville'] ,$_POST['nom'],  $_POST['prenom']);
+                    UserDAO::createUser($_POST['mail'], md5($_POST['mdp']), $_POST['adresse'], $_POST['cp'], $_POST['ville'] ,$_POST['nom'],  $_POST['prenom']);
                 }
                 else
                 {
@@ -43,10 +43,6 @@ $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Votre adresse :'));
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('adresse', 'adresse', '',  1, 'Entrez votre adresse...', ''));
-$formulaireInscription->ajouterComposantTab();
-
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Descriptif :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('desc', 'desc', '',  1, 'Entrez votre description...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Code postal :'));
