@@ -83,10 +83,6 @@ foreach (ResponsableDAO::getUsers() as $user) {
         new TableLink("Modifier", "?page=BioRelaiModifProducteur&producteur=" . $user["id"]),
         new TableLink("Supprimer", "?page=BioRelaiSuppProducteur&producteur=" . $user["id"])
     ));
-    $buttonAjouterUser = new Formulaire('post', '?m2lMP=ajouterUser', 'fAjout', 'fAjout'); //Création d'un boutton ajouter
-    $buttonAjouterUser->ajouterComposantLigne($buttonAjouterUser->creerInputSubmit('Ajouter', '1', 'Ajouter'));
-    $buttonAjouterUser->ajouterComposantTab();
-    $buttonAjouterUser->creerFormulaire();
 }
 
 require_once 'vue/bioRelai/vueBioRelaiProducteurs.php';

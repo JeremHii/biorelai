@@ -53,4 +53,4 @@ $formulaireInfos->ajouterComposantTab();
 
 $formulaireInfos->creerFormulaire();
 
-require_once 'vue/producteurs/vueProducteurModifier.php';
+require_once 'vue/bioRelai/vueBioRelaiProducteurModifier.php';
