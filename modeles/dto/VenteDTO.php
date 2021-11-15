@@ -25,11 +25,17 @@ class VenteDTO{
 
     public static function getVente($produit, $semaine){
         foreach(VenteDTO::$ventes as $vente){
-            if($vente->produit == $produit && $vente->semaine == $semaine){
+            if($vente->produit == $produit->getId() && $vente->semaine == $semaine->getNumero()){
                 return $vente;
             }
         }
         return null;
+    }
+
+    public static function deleteVente($vente){
+        if(($key = array_search($vente, VenteDTO::$ventes, true)) !== FALSE) {
+            unset(VenteDTO::$ventes[$key]);
+        }
     }
 
     public static function getVentesProducteurSemaine($producteur, $semaine){

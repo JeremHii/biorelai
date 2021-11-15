@@ -10,4 +10,35 @@ class VenteDAO{
             $vente->hydrate($venteDao);
         }
     }
+
+    public static function updateVente(VenteDTO $vente){
+        $db = Db::getDb();
+        $req = $db->prepare("UPDATE vente SET quantite = ?, prix = ? WHERE produit = ? AND semaine = ?");
+        $req->execute(array(
+            $vente->getQuantite(),
+            $vente->getPrix(),
+            $vente->getProduit(),
+            $vente->getSemaine()
+        ));
+    }
+
+    public static function addVente(VenteDTO $vente){
+        $db = Db::getDb();
+        $req = $db->prepare("INSERT INTO vente(produit, semaine, prix, quantite) VALUES (?, ?, ?, ?)");
+        $req->execute(array(
+            $vente->getProduit(),
+            $vente->getSemaine(),
+            $vente->getPrix(),
+            $vente->getQuantite()
+        ));
+    }
+
+    public static function deleteVente(VenteDTO $vente){
+        $db = Db::getDb();
+        $req = $db->prepare("DELETE FROM vente WHERE produit = ? AND semaine = ?");
+        $req->execute(array(
+            $vente->getProduit(),
+            $vente->getSemaine()
+        ));
+    }
 }

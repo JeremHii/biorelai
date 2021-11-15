@@ -4,6 +4,7 @@
         <br>
         <?php 
             $ventesTableau->show();
+            echo $message;
         ?>
 	</div>
 </div>
