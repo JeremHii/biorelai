@@ -22,6 +22,17 @@ class ProduitDAO{
         ));
     }
 
+    public static function addProduit(ProduitDTO $produit){
+        $db = Db::getDb();
+        $req = $db->prepare("INSERT INTO produit(nom, descriptif, unite, id_utilisateur) VALUES (?, ?, ?, ?)");
+        $req->execute(array(
+            $produit->getNom(),
+            $produit->getDescriptif(),
+            $produit->getUnite(),
+            $produit->getId_utilisateur()
+        ));
+    }
+
     public static function deleteProduit(ProduitDTO $produit){
         $db = Db::getDb();
         $req = $db->prepare("DELETE FROM produit WHERE id = ?");

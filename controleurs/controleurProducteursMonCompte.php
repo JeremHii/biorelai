@@ -87,16 +87,6 @@ $formulaireModifMdp->ajouterComposantTab();
 $formulaireModifMdp->ajouterComposantLigne($formulaireModifMdp-> creerInputSubmit('submitModifMdp', 'submitModifMdp', 'Modifier votre mot de passe'));
 $formulaireModifMdp->ajouterComposantTab();
 
-FonctionDAO::createFonctions();
-
-$select = new Select("Nombre");
-foreach (FonctionDTO::getFonctions() as $fonction) {
-    $select->addOption(new SelectOption($fonction->getCode(), $fonction->getLibelle(), $user->getFonction() == $fonction->getCode()));
-}
-
-$formulaireModifMdp->ajouterComposantLigne($select);
-$formulaireModifMdp->ajouterComposantTab();
-
 $formulaireModifMdp->creerFormulaire();
 
 
