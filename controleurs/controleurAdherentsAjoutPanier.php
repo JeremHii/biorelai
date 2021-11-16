@@ -22,13 +22,14 @@ if(isset($user) && $user->getFonction() == "ADH"){
                     echo "<SCRIPT>javascript:window.close()</SCRIPT>";
                 }
                 else{
-                    array_push($panier, array("nom"=>$var->getNom(), "descriptif"=>$var->getDescriptif(), "quantite"=>$_POST['quantite']));
+                    array_push($panier, array("id"=>$_POST['id'], "nom"=>$var->getNom(), "descriptif"=>$var->getDescriptif(), "quantite"=>$_POST['quantite']));
                 }
             }
         }else{
-            array_push($panier, array("nom"=>$var->getNom(), "descriptif"=>$var->getDescriptif(), "quantite"=>$_POST['quantite']));
+            array_push($panier, array("id"=>$_POST['id'], "nom"=>$var->getNom(), "descriptif"=>$var->getDescriptif(), "quantite"=>$_POST['quantite']));
         }
-
+        
+        //Je re serialize le panier
         $_SESSION['Panier'] = serialize($panier);
 
         //Ici en javascript je ferme la fenêtre
