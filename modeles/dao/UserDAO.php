@@ -109,12 +109,14 @@ class UserDAO{
         $req->execute();
     }
 
-    public static function getFactures(){
+    public static function getFactures($idUser){
         $db = Db::getDb();
         $req = $db->prepare("
         SELECT date, facturesPDF
         FROM commande
+        WHERE idUtilisateur=:id
         ");
+        $req->bindParam(':id', $idUser);
         $req->execute();
         
         return $req->fetchAll();

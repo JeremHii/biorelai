@@ -10,4 +10,18 @@ class ProduitDAO{
             $produit->hydrate($produitDao);
         }
     }
+
+    public static function getProduitNomById($id){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        SELECT nom, descriptif
+        FROM produit
+        WHERE id=:id
+        ");
+        $req->bindParam(':id', $id);
+        $req->execute();
+        
+        return $req->fetchAll();
+    }
+
 }
