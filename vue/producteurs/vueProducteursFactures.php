@@ -5,6 +5,7 @@
         <?php 
             foreach($tableaux as $tableau){
                 $tableau->show();
+                echo "<br>";
             }
         ?>
 	</div>
