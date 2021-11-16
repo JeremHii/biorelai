@@ -2,7 +2,7 @@
 
 FactureDAO::createFactures();
 UserDAO::createUsers();
-
+//Afficher sous forme de tableau les facture des producteurs et des adhérents
 $tableFactures = new Table(array('Utilisateur', 'Date', 'Numéro', 'Facture PDF'));
 foreach(FactureDTO::getFactures() as $factures){
     $user = UserDTO::getUser($factures->getIdUtilisateur());

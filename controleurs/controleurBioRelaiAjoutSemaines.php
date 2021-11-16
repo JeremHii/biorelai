@@ -15,19 +15,19 @@ if(isset($_POST["dateDebutProducteur"]) && isset($_POST["dateFinProducteur"]) &&
 
 $formulaireSemaine = new Formulaire('post', '', 'fSemaine', 'fSemaine'); //Création d'un nouveau formulaire
 $formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerLabel('Date Debut Producteur :'));
-$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('dateDebutProducteur', 'dateDebutProducteur', date("Y-m-d"))); //Affichage du nom de l'utilisateur
+$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('dateDebutProducteur', 'dateDebutProducteur', date("Y-m-d"))); //Affichage de la Date Debut Producteur
 $formulaireSemaine->ajouterComposantTab();
 
 $formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerLabel('Date Fin Producteur :'));
-$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('dateFinProducteur', 'dateFinProducteur', date("Y-m-d")));//Affichage du login de l'utilisateur
+$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('dateFinProducteur', 'dateFinProducteur', date("Y-m-d")));//Affichage de la Date Fin Producteur
 $formulaireSemaine->ajouterComposantTab();
 
 $formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerLabel('Date Fin Client :'));
-$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('dateFinClient', 'dateFinClient', date("Y-m-d")));//Affichage du statut de l'utilisateur
+$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('dateFinClient', 'dateFinClient', date("Y-m-d")));//Affichage de la Date Fin Client
 $formulaireSemaine->ajouterComposantTab();
 
 $formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerLabel('Date vente :'));
-$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('datevente', 'datevente', date("Y-m-d")));//Affichage de la fonction de l'utilisateur
+$formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputDate('datevente', 'datevente', date("Y-m-d")));//Affichage de la Date vente
 $formulaireSemaine->ajouterComposantTab();
 
 $formulaireSemaine->ajouterComposantLigne($formulaireSemaine->creerInputSubmit('Ajouter', '1', 'Ajouter'));
