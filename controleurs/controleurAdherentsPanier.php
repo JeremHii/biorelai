@@ -15,6 +15,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
             $panier = $newPanier;
             $_SESSION['Panier'] = serialize($panier);
         }
+
         $composant = "<table border='1'>
         <tr>
         <th>Nom</th>
@@ -38,7 +39,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
 
         echo $composant;
 
-        $formulairePanier = new Formulaire('post', '#', 'Valider', 'Valider');
+        $formulairePanier = new Formulaire('post', 'index.php?page=AdherentsCommandeCreer', 'Valider', 'Valider');
 
         $formulairePanier->ajouterComposantLigne($formulairePanier-> creerInputSubmit('submitValider', 'submitValider', 'Valider ma commande'));
         $formulairePanier->ajouterComposantTab();
