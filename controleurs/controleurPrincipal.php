@@ -11,9 +11,9 @@ $bioRelaiMP->ajouterComposant($bioRelaiMP->creerItemLien("Accueil", "Visiteurs")
 
 if(isset($_SESSION['identification'])){
     $user = unserialize($_SESSION['identification']);
-    echo("Connecté en tant que " . $user->getPrenom() . " " . $user->getNom()[0] . ".");
+    //echo("Connecté en tant que " . $user->getPrenom() . " " . $user->getNom()[0] . ".");
 }else{
-    echo("non Connecté");
+    //echo("non Connecté");
 }
 
 //Faire le spit selon status

@@ -41,7 +41,15 @@ class SemaineDTO{
                 $semaineActive = $semaine;
             }
         }
+
         return $semaineActive;
+    }
+
+    public function canProducteurSell() : bool{
+        if(strtotime('now') >= strtotime($this->dateDebutProducteur) && strtotime('now') < strtotime($this->dateFinProducteur)){
+            return true;
+        }
+        return false;
     }
 
     /**

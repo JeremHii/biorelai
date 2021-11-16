@@ -1,4 +1,5 @@
 <?php
+if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
 ProduitDAO::createProduits();
 

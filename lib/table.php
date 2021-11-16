@@ -3,11 +3,13 @@
 class Table{
     private $header;
     private $rows;
+    private $title;
 
-    public function __construct(array $header)
+    public function __construct(array $header, $title="")
     {
         $this->header = $header;
-        $this-> rows = array();
+        $this->rows = array();
+        $this->title = $title;
     }
 
     public function addRow($row){
@@ -15,7 +17,11 @@ class Table{
     }
 
     public function show(){
-        $table = "<table border='1' style='margin-left:auto; margin-right: auto;'>";
+        $table = "";
+        if($this->title != ""){
+            $table = $this->title . "<br>";
+        }
+        $table .= "<table border='1' style='margin-left:auto; margin-right: auto;'>";
         $table .=   "<thead>";
         $table .=       "<tr>";
 
@@ -77,7 +83,6 @@ class Table{
             
             $table .= "</tr>";
         }
-
         
         $table .=   "</tbody>";
         $table .= "</table>";
