@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 17 nov. 2021 à 22:20
--- Version du serveur :  10.4.18-MariaDB
--- Version de PHP : 8.0.3
+-- Généré le : mer. 17 nov. 2021 à 22:58
+-- Version du serveur :  10.4.11-MariaDB
+-- Version de PHP : 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,17 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `biorelai`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE `categorie` (
+  `code` int(11) NOT NULL,
+  `libelle` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -96,17 +107,18 @@ CREATE TABLE `produit` (
   `nom` varchar(50) NOT NULL,
   `descriptif` varchar(50) NOT NULL,
   `unite` varchar(50) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL
+  `id_utilisateur` int(11) NOT NULL,
+  `categorie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`id`, `nom`, `descriptif`, `unite`, `id_utilisateur`) VALUES
-(1, 'Carotte', 'La carotte douce', 'kg', 2),
-(4, 'Patate', 'jsp mon reuf', 'kg', 2),
-(5, 'Betterave', 'aucune desc', 'kg', 9);
+INSERT INTO `produit` (`id`, `nom`, `descriptif`, `unite`, `id_utilisateur`, `categorie`) VALUES
+(1, 'Carotte', 'La carotte douce', 'kg', 2, 0),
+(4, 'Patate', 'jsp mon reuf', 'kg', 2, 0),
+(5, 'Betterave', 'aucune desc', 'kg', 9, 0);
 
 -- --------------------------------------------------------
 
@@ -176,6 +188,12 @@ CREATE TABLE `vente` (
 --
 
 --
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`code`);
+
+--
 -- Index pour la table `commande`
 --
 ALTER TABLE `commande`
@@ -226,6 +244,12 @@ ALTER TABLE `vente`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
