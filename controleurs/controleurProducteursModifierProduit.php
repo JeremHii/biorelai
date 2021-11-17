@@ -15,7 +15,7 @@ $message = "";
 
 //Formulaire envoyé
 if(isset($_POST["confirm"])){
-    if(isset($_POST["nom"]) && isset($_POST["description"]) && isset($_POST["unite"])){
+    if(isset($_POST["nom"]) && isset($_POST["description"]) && isset($_POST["unite"]) && isset($_POST["categorie"])){
         //On modifie l'objet produit et on l'update dans la bdd
         $produit->setNom($_POST["nom"]);
         $produit->setDescriptif($_POST["description"]);

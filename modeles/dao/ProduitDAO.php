@@ -18,8 +18,8 @@ class ProduitDAO{
             $produit->getNom(),
             $produit->getDescriptif(),
             $produit->getUnite(),
-            $produit->getId(),
-            $produit->getCategorie()
+            $produit->getCategorie(),
+            $produit->getId()
         ));
     }
 
