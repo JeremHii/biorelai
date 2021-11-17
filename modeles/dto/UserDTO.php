@@ -38,6 +38,16 @@ class UserDTO{
         return null;
     }
 
+    public function getCommandes() : array{
+        $commandes = array();
+        foreach (CommandeDTO::getCommandes() as $commande) {
+            if($commande->getIdUtilisateur() == $this->id){
+                array_push($commandes, $commande);
+            }
+        }
+        return $commandes;
+    }
+
     /**
      * Get the value of fonction
      */ 

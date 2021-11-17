@@ -2,6 +2,8 @@
 if(isset($user) && $user->getFonction() == "ADH"){
     //Je vérifie si l'adhérent peut acheter 
     SemaineDAO::createSemaines();
+    VenteDAO::createVentes();
+    ProduitDAO::createProduits();
     if(SemaineDTO::getSemaineActive()->canAdherentBuy()){
 
         //Le titre de la page
@@ -19,21 +21,23 @@ if(isset($user) && $user->getFonction() == "ADH"){
         <th>Ajouter</th>
         </tr>";
         //Je créer une liste avec toute les ventes de la semaine
-        $liste = VenteDAO::getVenteSemaine();
+        //$liste = VenteDAO::getVenteSemaine();
+        $liste = VenteDTO::getVentes();
         if(!empty($liste)){
             //J'affiche cette liste
             foreach($liste as $row)
             {
+                $produit = ProduitDTO::getProduit($row->getProduit());
                 $composant .= "<form method='post' action='index.php?page=AdherentsAjoutPanier'>";
                 $composant .= "<tr>";
-                $composant .= "<td style='display: none;'>" . "<input type='hidden' name='id' value='" . $row['id'] . "'/>" . "</td>";
-                $composant .= "<td>" . "<input type='text' name='nom' class='AchatTab' value='" . $row['nom'] . "'disabled/>" . "</td>";
-                $composant .= "<td>" . "<input type='text' name='desc' class='AchatTab' value='" . $row['descriptif'] . "'disabled/>" . "</td>";
-                $composant .= "<td>" . "<input type='text' name='prix' class='AchatTab' value='" . $row['prix'] . "'disabled/>" . "</td>";
-                $composant .= "<td>" . "<input type='text' name='quantiteM' class='AchatTab' value='" . $row['quantite'] . "'disabled/>" . "</td>";
+                $composant .= "<td style='display: none;'>" . "<input type='hidden' name='id' value='" . $produit->getId() . "'/>" . "</td>";
+                $composant .= "<td>" . "<input type='text' name='nom' class='AchatTab' value='" . $produit->getNom() . "'disabled/>" . "</td>";
+                $composant .= "<td>" . "<input type='text' name='desc' class='AchatTab' value='" . $produit->getDescriptif() . "'disabled/>" . "</td>";
+                $composant .= "<td>" . "<input type='text' name='prix' class='AchatTab' value='" . $row->getPrix() . "'disabled/>" . "</td>";
+                $composant .= "<td>" . "<input type='text' name='quantiteM' class='AchatTab' value='" . $row->getQuantite() . "'disabled/>" . "</td>";
                 //Faire en sorte que l'utilisateur peut saisir que la quantité max disponible
                 $composant .= "<td>" ."<select name='quantite'>";
-                for($i = 1; $i <= $row['quantite']; $i++){
+                for($i = 1; $i <= $row->getQuantite(); $i++){
                     $composant .= "<option value='" . $i . "'>" . $i . "</option>";
                 }
                 $composant .= "</select>". "</td>";

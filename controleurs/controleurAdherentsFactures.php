@@ -9,14 +9,16 @@ if(isset($user) && $user->getFonction() == "ADH"){
         <th>Date</th>
         <th>Factures</th>
         </tr>";
-        $liste = UserDAO::getFactures($user->getId());
+        CommandeDAO::createCommandes();
+
+        $liste = $user->getCommandes();
         if(!empty($liste)){
             foreach($liste as $row)
             {
                 $composant .= "<tr>";
-                $composant .= "<td>" . $row['date'] . "</td>";
+                $composant .= "<td>" . $row->getDate() . "</td>";
                 $composant .= "<td> <a href ='";
-                $composant .=  $row['facturesPDF'] . "' title='Afficher' target='blank_'> Afficher</a>";
+                $composant .=  $row->getFacturesPDF() . "' title='Afficher' target='blank_'> Afficher</a>";
                 $composant .= "</td>";
                 $composant .= "</tr>";
             }

@@ -11,7 +11,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
             if($_POST['mdp'] == $_POST['cmdp'])
             {  
                 //J'appelle la fonction de la DAO pour changer le mot de passe
-                UserDAO::changeMdp($user->getId(), md5($_POST['mdp']));
+                UserDAO::updateUserPass($user, $_POST["mdp"]);
                 header("Location: ?page=Deconnexion");
             }
             else{
