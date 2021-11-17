@@ -9,6 +9,7 @@ class ProduitDTO{
     private $descriptif;
     private $unite;
     private $id_utilisateur;
+    private $categorie;
 
     public function __construct()
     {
@@ -128,6 +129,26 @@ class ProduitDTO{
     public function setId_utilisateur($id_utilisateur)
     {
         $this->id_utilisateur = $id_utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of categorie
+     */ 
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Set the value of categorie
+     *
+     * @return  self
+     */ 
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
