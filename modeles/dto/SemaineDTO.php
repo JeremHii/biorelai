@@ -58,7 +58,7 @@ class SemaineDTO{
         }
         return false;
     }
-
+  
     /**
      * Get the value of numero
      */ 

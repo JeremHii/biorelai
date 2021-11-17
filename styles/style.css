@@ -296,11 +296,19 @@ Formulaire de connexion
 	border: 1px solid black ;
 }
 
+.conteneur{
+	text-align: center;
+}
+
+.titre{
+	font-size: 25px;
+	font-weight: bold;
+
 #prevention{
 	color: red;
 }
 
-.conteneur{
+/*.conteneur{
 	display: inline-block;	
 	width: 80%;
 	vertical-align: top;
@@ -308,7 +316,7 @@ Formulaire de connexion
 	margin-top: 20px;
 	padding-right: 15px;
 	margin-bottom: 20px;
-}
+}*/
 
 #facture{
 	margin-left: auto;

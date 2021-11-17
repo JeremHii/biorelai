@@ -41,15 +41,4 @@ class VenteDAO{
             $vente->getSemaine()
         ));
     }
-
-    public static function getVenteSemaine(){
-        $db = Db::getDb();
-        $req = $db->prepare("
-        SELECT produit.id, nom, descriptif, quantite, prix
-        FROM produit, vente 
-        WHERE produit.id = vente.produit
-        ");
-        $req->execute();
-        return $req->fetchAll();
-    }
 }

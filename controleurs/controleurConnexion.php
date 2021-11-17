@@ -1,6 +1,6 @@
 <?php
 
-//Si il n'est pas connecter on vérifie que le mot de passe et le login est bon
+//Si il n'est pas connecté on vérifie que le mot de passe et le login est bon
 if(!isset($user)){
     if(isset($_POST['mail']) || isset($_POST['mdp'])){
         if(isset($_POST['mail']) && isset($_POST['mdp']) && !empty($_POST['mail']) && !empty($_POST['mdp']))
