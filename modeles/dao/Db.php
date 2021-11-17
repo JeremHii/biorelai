@@ -3,9 +3,9 @@
 class Db{
     public static function getDb(){
 
-        $dsn = "mysql:host=10.100.0.5;dbname=jdelmas_biorelai;charset=utf8";
-        $username = "jdelmas";
-        $password = "jdelmas";
+        $dsn = "mysql:host=localhost;dbname=biorelai;charset=utf8";
+        $username = "root";
+        $password = "";
         $db = new PDO($dsn, $username, $password);
         return $db;
     }
