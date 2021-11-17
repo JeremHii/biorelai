@@ -1,33 +1,33 @@
 <?php
 
-class FactureDTO{
+class CommandeDTO{
     use Hydrate;
 
-    private static $factures = array();
+    private static $commandes = array();
 
     private $id;
     private $idUtilisateur;
     private $date;
-    private $numero;
+    private $semaine;
     private $facturesPDF;
 
     public function __construct()
     {
-        array_push(FactureDTO::$factures, $this);
+        array_push(CommandeDTO::$commandes, $this);
     }
 
-    public static function getFactures() : array{
-        return FactureDTO::$factures;
+    public static function getCommandes() : array{
+        return CommandeDTO::$commandes;
     }
 
-    public static function setFactures(array $factures){
-        FactureDTO::$factures = $factures;
+    public static function setCommandes(array $commandes){
+        CommandeDTO::$commandes = $commandes;
     }
 
-    public static function getFacture($id){
-        foreach(FactureDTO::$factures as $facture){
-            if($facture->id == $id){
-                return $facture;
+    public static function getCommande($id){
+        foreach(CommandeDTO::$commandes as $commande){
+            if($commande->id == $id){
+                return $commande;
             }
         }
         return null;
@@ -94,21 +94,21 @@ class FactureDTO{
     }
 
     /**
-     * Get the value of numero
+     * Get the value of semaine
      */ 
-    public function getNumero()
+    public function getSemaine()
     {
-        return $this->numero;
+        return $this->semaine;
     }
 
     /**
-     * Set the value of numero
+     * Set the value of semaine
      *
      * @return  self
      */ 
-    public function setNumero($numero)
+    public function setSemaine($semaine)
     {
-        $this->numero = $numero;
+        $this->semaine = $semaine;
 
         return $this;
     }

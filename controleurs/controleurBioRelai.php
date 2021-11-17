@@ -4,3 +4,4 @@ $bioRelaiMP->ajouterComposant($bioRelaiMP->creerItemLien("Mon Compte", "BioRelai
 $bioRelaiMP->ajouterComposant($bioRelaiMP->creerItemLien("Les Producteurs", "BioRelaiProducteurs"));
 $bioRelaiMP->ajouterComposant($bioRelaiMP->creerItemLien("Les Semaines", "BioRelaiSemaines"));
 $bioRelaiMP->ajouterComposant($bioRelaiMP->creerItemLien("Les Factures", "BioRelaiFacture"));
+$bioRelaiMP->ajouterComposant($bioRelaiMP->creerItemLien("Les Catégories", "BioRelaiCategorie"));

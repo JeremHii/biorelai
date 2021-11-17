@@ -1,17 +1,17 @@
 <?php
 
-FactureDAO::createFactures();
+CommandeDAO::createCommandes();
 UserDAO::createUsers();
 //Afficher sous forme de tableau les facture des producteurs et des adhérents
-$tableFactures = new Table(array('Utilisateur', 'Date', 'Numéro', 'Facture PDF'));
-foreach(FactureDTO::getFactures() as $factures){
-    $user = UserDTO::getUser($factures->getIdUtilisateur());
+$tableCommandes = new Table(array('Utilisateur', 'Date', 'Numéro', 'Facture PDF'));
+foreach(CommandeDTO::getCommandes() as $commande){
+    $user = UserDTO::getUser($commande->getIdUtilisateur());
     if($user->getFonction() == "PRD" || $user->getFonction() == "ADH"){
-        $tableFactures->addRow(array(
+        $tableCommandes->addRow(array(
             $user->getNom() . " " . $user->getPrenom(),
-            $factures->getDate(),
-            $factures->getNumero(),
-            new TableLink($factures->getFacturesPDF(), "Afficher"),
+            $commande->getDate(),
+            $commande->getSemaine(),
+            new TableLink($commande->getFacturesPDF(), "Afficher"),
         ));
     }
 }

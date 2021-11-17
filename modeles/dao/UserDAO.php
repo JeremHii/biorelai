@@ -135,7 +135,7 @@ class UserDAO{
             prenom=:prenom,
             adresse=:adresse,
             ville=:ville,
-            cp=:cp,
+            cp=:cp
         WHERE id=:id;
         ");
         $req->bindParam(':id', $idUser);
