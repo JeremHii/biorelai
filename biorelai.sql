@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 17 nov. 2021 à 22:16
--- Version du serveur :  10.4.11-MariaDB
--- Version de PHP : 7.4.6
+-- Généré le : mer. 17 nov. 2021 à 22:20
+-- Version du serveur :  10.4.18-MariaDB
+-- Version de PHP : 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -259,8 +259,8 @@ ALTER TABLE `utilisateur`
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `commande_semaine_FK` FOREIGN KEY (`semaine`) REFERENCES `semaine` (`numero`) ON DELETE CASCADE;
+  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `commande_semaine_FK` FOREIGN KEY (`semaine`) REFERENCES `semaine` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `ligne_commande`
@@ -273,20 +273,20 @@ ALTER TABLE `ligne_commande`
 -- Contraintes pour la table `produit`
 --
 ALTER TABLE `produit`
-  ADD CONSTRAINT `produit_utilisateur_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `produit_utilisateur_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD CONSTRAINT `utilisateur_fonction_FK` FOREIGN KEY (`fonction`) REFERENCES `fonction` (`code`);
+  ADD CONSTRAINT `utilisateur_fonction_FK` FOREIGN KEY (`fonction`) REFERENCES `fonction` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `vente`
 --
 ALTER TABLE `vente`
-  ADD CONSTRAINT `vente_produit_FK` FOREIGN KEY (`produit`) REFERENCES `produit` (`id`),
-  ADD CONSTRAINT `vente_semaine0_FK` FOREIGN KEY (`semaine`) REFERENCES `semaine` (`numero`);
+  ADD CONSTRAINT `vente_produit_FK` FOREIGN KEY (`produit`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `vente_semaine0_FK` FOREIGN KEY (`semaine`) REFERENCES `semaine` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
