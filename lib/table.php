@@ -1,5 +1,9 @@
 <?php
 
+/**
+* @param header - Array contenant le nom des colonnes du tableau
+* @param title - Titre donné au tableau 
+*/
 class Table{
     private $header;
     private $rows;
@@ -91,6 +95,9 @@ class Table{
     }
 }
 
+/*
+Permet de créer une cellule lien dans un tableau
+*/
 class TableLink{
     private $text;
     private $link;
@@ -128,6 +135,9 @@ class TableLink{
     }
 }
 
+/*
+Permet de créer une ligne contenant un formulaire
+*/
 class RowForm{
     private $id;
     private $cells;
@@ -200,6 +210,9 @@ class RowForm{
     }
 }
 
+/*
+Permet d'ajouter un input à une ligne de type form
+*/
 class RowFormInput{
     private $name;
     private $value;
@@ -295,6 +308,9 @@ class RowFormInput{
     }
 }
 
+/*
+Permet d'ajouter un champ invisible à une ligne de type form
+*/
 class RowFormHidden{
     private $name;
     private $value;
@@ -346,6 +362,9 @@ class RowFormHidden{
     }
 }
 
+/*
+Permet d'ajouter un label à une ligne de type form
+*/
 class RowFormLabel{
     private $text;
 
@@ -375,6 +394,9 @@ class RowFormLabel{
     }
 }
 
+/*
+Permet de mettre un bouton submit à une ligne de type form
+*/
 class FormSubmit{
     private $name;
     private $text;

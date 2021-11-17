@@ -1,6 +1,9 @@
 <?php
+
+//Vérifie que l'utilisateur est connecté et qu'il est producteur
 if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
+//On créé les objets DTO nécessaires
 ProduitDAO::createProduits();
 
 $produitsTableau = new Table(array("N°", "Nom", "Descriptif", "Unite", "", ""));

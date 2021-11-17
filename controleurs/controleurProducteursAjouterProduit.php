@@ -1,5 +1,6 @@
 <?php
 
+//Vérifie que l'utilisateur est connecté et qu'il est producteur
 if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
 $message = "";
@@ -7,6 +8,7 @@ $message = "";
 //Formulaire envoyé
 if(isset($_POST["confirm"])){
     if(isset($_POST["nom"]) && isset($_POST["description"]) && isset($_POST["unite"])){
+        //Créer un produit et l'ajoute à la BDD
         $produit = new ProduitDTO();
         $produit->setNom($_POST["nom"]);
         $produit->setDescriptif($_POST["description"]);

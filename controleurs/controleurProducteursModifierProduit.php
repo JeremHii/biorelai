@@ -1,8 +1,11 @@
 <?php
 
+//Vérifie que l'utilisateur est connecté et qu'il est producteur
 if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
+//On créé les objets DTO nécessaires
 ProduitDAO::createProduits();
+//Si le produit renseigné existe bien et appartient bien au producteur
 if(!isset($_GET["produit"]) || ProduitDTO::getProduit($_GET["produit"]) == null || ProduitDTO::getProduit($_GET["produit"])->getId_utilisateur() != $user->getId()) header("Location: ?page=producteursProduits");
 
 $produit = ProduitDTO::getProduit($_GET["produit"]);
@@ -11,6 +14,7 @@ $message = "";
 //Formulaire envoyé
 if(isset($_POST["confirm"])){
     if(isset($_POST["nom"]) && isset($_POST["description"]) && isset($_POST["unite"])){
+        //On modifie l'objet produit et on l'update dans la bdd
         $produit->setNom($_POST["nom"]);
         $produit->setDescriptif($_POST["description"]);
         $produit->setUnite($_POST["unite"]);

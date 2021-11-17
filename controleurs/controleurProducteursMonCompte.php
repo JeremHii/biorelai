@@ -1,10 +1,13 @@
 <?php
+//Vérifie que l'utilisateur est connecté et qu'il est producteur
 if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
 $message = "";
 
+//Formulaire pour modifier les infos générales envoyé
 if(isset($_POST["submitModif"])){
     if(isset($_POST["mail"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["adresse"]) && isset($_POST["ville"]) && isset($_POST["cp"]) && isset($_POST["descriptif"])){
+        //On modifie l'objet user, on l'update dans la bdd et on met bien à jour la variable de session
         $user->setMail($_POST["mail"]);
         $user->setNom($_POST["nom"]);
         $user->setPrenom($_POST["prenom"]);
@@ -22,9 +25,11 @@ if(isset($_POST["submitModif"])){
     }
 }
 
+//Formulaire pour modifier le mot de passe envoyé
 if(isset($_POST["submitModifMdp"])){
     if(isset($_POST["newPass"]) && isset($_POST["newPassConfirm"])){
         if($_POST["newPass"] == $_POST["newPassConfirm"]){
+            //On modifie le mot de passe dans la bdd
             UserDAO::updateUserPass($user, $_POST["newPass"]);
             $message = "Modification confirmée !";
         }
@@ -36,6 +41,7 @@ if(isset($_POST["submitModifMdp"])){
     }
 }
 
+//Formulaire pour modifié les infos générales
 $formulaireModif = new Formulaire('post', '', 'fMonCompte', 'fMonCompte');
 
 $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre mail :'));
@@ -74,6 +80,7 @@ $formulaireModif->ajouterComposantTab();
 
 $formulaireModif->creerFormulaire();
 
+//Formulaire pour modifié le mot de passe
 $formulaireModifMdp = new Formulaire('post', '', 'fMonCompte', 'fMonCompte');
 
 $formulaireModifMdp->ajouterComposantLigne($formulaireModifMdp->creerLabel('Nouveau mot de passe :'));

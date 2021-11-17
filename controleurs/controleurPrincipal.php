@@ -9,6 +9,7 @@ $bioRelaiMP->ajouterComposant($bioRelaiMP->creerItemLien("Accueil", "Visiteurs")
 
 //unset($_SESSION['identification']);
 
+//Contient l'objet UserDTO lié à l'utilisateur
 if(isset($_SESSION['identification'])){
     $user = unserialize($_SESSION['identification']);
     //echo("Connecté en tant que " . $user->getPrenom() . " " . $user->getNom()[0] . ".");

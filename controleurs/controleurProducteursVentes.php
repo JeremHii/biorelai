@@ -1,14 +1,18 @@
 <?php
 
+//Vérifie que l'utilisateur est connecté et qu'il est producteur
 if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
+//On créé les objets DTO nécessaires
 ProduitDAO::createProduits();
 VenteDAO::createVentes();
 SemaineDAO::createSemaines();
 
 $message = "";
 
+//Formulaire envoyé
 if(isset($_POST["confirm"])){
+    // Si les ventes ne sont pas activées
     if(!SemaineDTO::getSemaineActive()->canProducteurSell()){
         $message = "Les ventes ne sont pas encore ouverte.";
     }
@@ -17,9 +21,11 @@ if(isset($_POST["confirm"])){
         $quantite = $_POST["quantite"];
         $prix = $_POST["prix"];
     
+        //Si le produit modifié ne lui appartient pas
         if(ProduitDTO::getProduit($produit) == null || ProduitDTO::getProduit($produit)->getId_utilisateur() != $user->getId()){
             $message = "Vous n'avez pas la permission de modifier ce produit.";
         }
+        //Si la quantité et le prix ne sont pas des valeurs numériques
         else if(!is_numeric($quantite) || !is_numeric($prix)){
             $message = "Les valeurs doivent être numérique.";
         }
@@ -28,6 +34,7 @@ if(isset($_POST["confirm"])){
             $semaine = SemaineDTO::getSemaineActive();
             $vente = VenteDTO::getVente($produit, $semaine);
     
+            //Si la quantité est inférieure à 0 on la supprime de la bdd et des objets DTO
             if($quantite <= 0){
                 if($vente != null){
                     VenteDAO::deleteVente($vente);
@@ -36,6 +43,7 @@ if(isset($_POST["confirm"])){
             }
     
             else{
+                //Si l'objet vente n'existe pas on le créer et on l'ajoute à la bdd
                 if($vente == null){
                     $vente = new VenteDTO();
                     $vente->setProduit($produit->getId());
@@ -44,6 +52,7 @@ if(isset($_POST["confirm"])){
                     $vente->setPrix($prix);
     
                     VenteDAO::addVente($vente);
+                //Sinon on modifie juste ses attributs et on l'update dans la bdd
                 }else{
                     $vente->setQuantite($quantite);
                     $vente->setPrix($prix);
@@ -60,15 +69,17 @@ if(isset($_POST["confirm"])){
     
 }
 
+//Si le producteur peut vendre (car c'est la période)
 if(SemaineDTO::getSemaineActive()->canProducteurSell()){
 
     $ventesTableau = new Table(array("Produit", "Quantité", "Prix", ""));
-    $ventes = VenteDTO::getVentesProducteurSemaine($user->getId(), SemaineDTO::getSemaineActive());
 
     foreach (ProduitDTO::getProduits() as $produit) {
+        //Si le produit appartient au producteur
         if($produit->getId_utilisateur() == $user->getId()){
             $quantite = 0;
             $prix = 0;
+            //Si le produit est déjà en vente on récupère la quantité et le prix de vente
             if(VenteDTO::getVente($produit, SemaineDTO::getSemaineActive()) != null){
                 $vente = VenteDTO::getVente($produit, SemaineDTO::getSemaineActive());
                 $quantite = $vente->getQuantite();
