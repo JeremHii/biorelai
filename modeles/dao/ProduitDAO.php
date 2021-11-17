@@ -10,7 +10,7 @@ class ProduitDAO{
             $produit->hydrate($produitDao);
         }
     }
-
+  
     public static function updateProduit(ProduitDTO $produit){
         $db = Db::getDb();
         $req = $db->prepare("UPDATE produit SET nom = ?, descriptif = ?, unite = ? WHERE id = ?");

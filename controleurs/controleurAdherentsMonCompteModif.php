@@ -1,22 +1,11 @@
 <?php
-    $messageErreurConnexion = "";
 
-if(!empty($_POST['id']) && isset($_POST['id'])){
-    if($_POST['mail'] != $user->getMail() && !empty($_POST['mail'])){
-        UserDAO::changeMail($user->getId(), $_POST['mail']);
-
-        $userDTO = new UserDTO();
-        $userDTO->hydrate($userDAO);
-        $_SESSION['identification'] = serialize($userDTO);
-        $user = unserialize($_SESSION['identification']);
-    }
-    elseif(isset($_POST['mdp']) && isset($_POST['cmdp'])){
-        
-    }
-    else{
-        $messageErreurConnexion = "test";
-    }
+if(isset($user) && $user->getFonction() == "ADH"){
+    //J'appelle une fonction de la DAO user pour faire la requête de changement d'informations
+    UserDAO::changeModif($user->getId(), $_POST['mail'], $_POST['nom'], $_POST['prenom'], $_POST['adresse'] ,$_POST['ville'] ,$_POST['cp']);
+    header("Location: ?page=Deconnexion");
 }
 else{
-    $messageErreurConnexion = "test";
+    header("Location: .");
 }
+

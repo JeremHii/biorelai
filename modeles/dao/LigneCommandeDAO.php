@@ -10,4 +10,14 @@ class LigneCommandeDAO{
             $ligneCommande->hydrate($ligneCommandeDao);
         }
     }
+
+    public static function addLigneCommande(LigneCommandeDTO $ligneCommande){
+        $db = Db::getDb();
+        $req = $db->prepare("INSERT INTO ligne_commande(produit, commande, quantite) VALUES (?, ?, ?)");
+        $req->execute(array(
+            $ligneCommande->getProduit(),
+            $ligneCommande->getCommande(),
+            $ligneCommande->getQuantite()
+        ));
+    }
 }

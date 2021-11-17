@@ -3,6 +3,7 @@
 		<div class='connexion'>
 			<?php 
 				$formulaireModif->afficherFormulaire();
+				$formulaireModifCompteMdp->afficherFormulaire();
 				$formulaireSupp->afficherFormulaire();
 			?>
 		</div>
