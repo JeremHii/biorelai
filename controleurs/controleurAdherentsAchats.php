@@ -1,9 +1,14 @@
 <?php
 if(isset($user) && $user->getFonction() == "ADH"){
+    //Je vérifie si l'adhérent peut acheter 
     SemaineDAO::createSemaines();
     if(SemaineDTO::getSemaineActive()->canAdherentBuy()){
+
+        //Le titre de la page
         $titre = "<h1>Voici la liste des produits en vente</h1>";
         echo $titre;
+
+        //Je créer un tableau pour proposer toute les ventes
         $composant = "<table border='1'>
         <tr>
         <th>Nom</th>
@@ -13,8 +18,10 @@ if(isset($user) && $user->getFonction() == "ADH"){
         <th>Quantité souhaitée</th>
         <th>Ajouter</th>
         </tr>";
+        //Je créer une liste avec toute les ventes de la semaine
         $liste = VenteDAO::getVenteSemaine();
         if(!empty($liste)){
+            //J'affiche cette liste
             foreach($liste as $row)
             {
                 $composant .= "<form method='post' action='index.php?page=AdherentsAjoutPanier'>";
@@ -35,15 +42,15 @@ if(isset($user) && $user->getFonction() == "ADH"){
                 $composant .= "</tr>";
             }
             $composant .= "</table>";
-        
+            //J'affiche le tableau
             echo $composant;
         }
+        //Si les ventes ne sont pas ouverte on affiche un message
         else{
             echo "<h1 style='text-align: center; color: red;'>";
-            echo "Vous n'avez pas encore de facture";
+            echo "Il n'y a pas de produit en vente";
             echo "</h1>";
         }
-
         require_once 'vue/adherents/vueAdherentsAchats.php';
     }
     else{

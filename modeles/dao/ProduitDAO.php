@@ -10,7 +10,8 @@ class ProduitDAO{
             $produit->hydrate($produitDao);
         }
     }
-
+    
+    //Récupérer un produit avec un id
     public static function getProduitNomById($id){
         $db = Db::getDb();
         $req = $db->prepare("

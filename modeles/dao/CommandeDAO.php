@@ -11,6 +11,7 @@ class CommandeDAO{
         }
     }
 
+    //Pour créer une commande
     public static function addCommande(CommandeDTO $commande){
         $db = Db::getDb();
         $req = $db->prepare("INSERT INTO commande(idUtilisateur, date, semaine) VALUES (?, CURRENT_TIMESTAMP, ?)");
@@ -19,7 +20,8 @@ class CommandeDAO{
             $commande->getSemaine()
         ));
     }
-
+    
+    //Pour récupérer la dernière commande
     public static function getLastId(){
         $db = Db::getDb();
         $req = $db->prepare("SELECT DISTINCT max(id) as id FROM commande;");

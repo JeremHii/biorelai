@@ -2,12 +2,12 @@
 if(isset($user) && $user->getFonction() == "ADH"){
     //Je vérifie si l'id a était envoyé
     if(isset($_POST['id'])){
+        //Je vérifie si le panier existe
         if(!isset($_SESSION['Panier'])){
             $_SESSION['Panier'] = serialize(array());
         }
         //Je créer un objet produit
         ProduitDAO::createProduits();
-
         $panier = unserialize($_SESSION['Panier']);
 
 

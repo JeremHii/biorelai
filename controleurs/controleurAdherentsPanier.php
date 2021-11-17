@@ -1,8 +1,11 @@
 <?php
 if(isset($user) && $user->getFonction() == "ADH"){
+    //Je vérifie si le panier n'est pas vide
     if(!empty($_SESSION['Panier'])){
+        //J'affiche un titre
         $titre = "<h1>Votre panier</h1>";
         echo $titre;
+        //J'unserialize le panier
         $panier = unserialize($_SESSION['Panier']);
 
         if(isset($_POST['id'])){
@@ -16,6 +19,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
             $_SESSION['Panier'] = serialize($panier);
         }
 
+        //je créer un tableau pour afficher le panier
         $composant = "<table border='1'>
         <tr>
         <th>Nom</th>
@@ -38,7 +42,8 @@ if(isset($user) && $user->getFonction() == "ADH"){
         $composant .= "</table>";
 
         echo $composant;
-
+        
+        //Je créer un bouton pour créer la commande
         $formulairePanier = new Formulaire('post', 'index.php?page=AdherentsCommandeCreer', 'Valider', 'Valider');
 
         $formulairePanier->ajouterComposantLigne($formulairePanier-> creerInputSubmit('submitValider', 'submitValider', 'Valider ma commande'));

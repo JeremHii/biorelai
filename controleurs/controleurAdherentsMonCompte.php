@@ -1,7 +1,9 @@
 <?php
 if(isset($user) && $user->getFonction() == "ADH"){
+    //J'écris un message pour prévenir l'utilisateur
     $messagePrevention = "Après avoir changé vos informations vous devez vous reconnecter";
 
+    //Je créer un formulaire pour modif les infos de l'utilisateur
     $formulaireModif = new Formulaire('post', '?page=AdherentsMonCompteModif', 'fMonCompte', 'fMonCompte');
 
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerMessageAvecId($messagePrevention, "prevention"));
@@ -42,6 +44,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
 
     $formulaireModif->creerFormulaire();
 
+    //Je créer un button pour que l'utilisateur puisse modifier son mot de passe
     $formulaireModifCompteMdp = new Formulaire('post', '?page=AdherentsMonCompteMDP', 'fMonCompte', 'fMonCompte');
 
     $formulaireModifCompteMdp->ajouterComposantLigne($formulaireModifCompteMdp-> creerInputSubmit('submitModifmdp', 'submitModifmdp', 'Modifier votre mot de passe'));
@@ -50,7 +53,8 @@ if(isset($user) && $user->getFonction() == "ADH"){
     $formulaireModifCompteMdp->creerFormulaire();
 
     $messagePreventionSupp = "Attention la suppression du compte est définitive, impossible de revenir en arrière";
-
+    
+    //Je créer un button pour que l'utilisateur puisse supprimer son compte
     $formulaireSupp = new Formulaire('post', '?page=AdherentsSuppMonCompte', 'fMonCompte', 'fMonCompte');
 
     $formulaireSupp->ajouterComposantLigne($formulaireSupp->creerMessageAvecId($messagePreventionSupp, "prevention"));
