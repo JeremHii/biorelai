@@ -52,6 +52,13 @@ class SemaineDTO{
         return false;
     }
 
+    public function canAdherentBuy() : bool{
+        if(strtotime('now') >= strtotime($this->dateFinProducteur) && strtotime('now') < strtotime($this->dateFinClient)){
+            return true;
+        }
+        return false;
+    }
+  
     /**
      * Get the value of numero
      */ 

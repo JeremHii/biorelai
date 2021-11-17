@@ -277,7 +277,6 @@ Formulaire de connexion
 	color: #b08a39;	
 }
 
-
 .menuCategories li a {
 	color: #ffffff;
   	font-weight: bold;
@@ -304,4 +303,26 @@ Formulaire de connexion
 .titre{
 	font-size: 25px;
 	font-weight: bold;
+
+#prevention{
+	color: red;
+}
+
+/*.conteneur{
+	display: inline-block;	
+	width: 80%;
+	vertical-align: top;
+	font-size: 15px;
+	margin-top: 20px;
+	padding-right: 15px;
+	margin-bottom: 20px;
+}*/
+
+#facture{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#submitValider{
+	margin-top: 15px;
 }

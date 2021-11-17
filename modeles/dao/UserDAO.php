@@ -24,16 +24,15 @@ class UserDAO{
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function createUser($mail, $mdp, $adresse, $descriptif, $cp, $ville, $nom, $prenom, $fonction="ADH"){
+    public static function createUser($mail, $mdp, $adresse, $cp, $ville, $nom, $prenom, $fonction="ADH"){
         $db = Db::getDb();
         $req = $db->prepare("
-        INSERT INTO utilisateur(mail, mdp, adresse, descriptif, cp, ville, nom, prenom, fonction)
-        VALUES (:mail, :mdp, :adresse, :descriptif, :cp, :ville, :nom, :prenom, :fonction);
+        INSERT INTO utilisateur(mail, mdp, adresse, cp, ville, nom, prenom, fonction)
+        VALUES (:mail, :mdp, :adresse, :cp, :ville, :nom, :prenom, :fonction);
         ");
         $req->bindParam(':mail', $mail);
         $req->bindParam(':mdp', $mdp);
         $req->bindParam(':adresse', $adresse);
-        $req->bindParam(':descriptif', $descriptif);
         $req->bindParam(':cp', $cp);
         $req->bindParam(':ville', $ville);
         $req->bindParam(':nom', $nom);
