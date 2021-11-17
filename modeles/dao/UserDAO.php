@@ -24,16 +24,15 @@ class UserDAO{
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function createUser($mail, $mdp, $adresse, $descriptif, $cp, $ville, $nom, $prenom, $fonction="ADH"){
+    public static function createUser($mail, $mdp, $adresse, $cp, $ville, $nom, $prenom, $fonction="ADH"){
         $db = Db::getDb();
         $req = $db->prepare("
-        INSERT INTO utilisateur(mail, mdp, adresse, descriptif, cp, ville, nom, prenom, fonction)
-        VALUES (:mail, :mdp, :adresse, :descriptif, :cp, :ville, :nom, :prenom, :fonction);
+        INSERT INTO utilisateur(mail, mdp, adresse, cp, ville, nom, prenom, fonction)
+        VALUES (:mail, :mdp, :adresse, :cp, :ville, :nom, :prenom, :fonction);
         ");
         $req->bindParam(':mail', $mail);
         $req->bindParam(':mdp', $mdp);
         $req->bindParam(':adresse', $adresse);
-        $req->bindParam(':descriptif', $descriptif);
         $req->bindParam(':cp', $cp);
         $req->bindParam(':ville', $ville);
         $req->bindParam(':nom', $nom);
@@ -66,7 +65,7 @@ class UserDAO{
         $req->bindParam(':idUser', $idUser);
     }
 
-    public static function SuppIntervenants($idUser){
+    public static function SuppUtilisateur($idUser){
         $db = Db::getDb();
         $req = $db->prepare("
         DELETE FROM utilisateur
@@ -76,13 +75,51 @@ class UserDAO{
         $req->execute();
     }
 
-    public static function SuppProducteur($idUser){
+    public static function changeMdp($idUser, $mdp){
         $db = Db::getDb();
         $req = $db->prepare("
-        DELETE FROM utilisateur
-        WHERE id=:id
+        UPDATE utilisateur 
+        SET mdp=:mdp
+        WHERE id=:id;
+        ");
+        $req->bindParam(':id', $idUser);
+        $req->bindParam(':mdp', $mdp);
+        $req->execute();
+    }
+
+    public static function changeModif($idUser, $mail, $nom, $prenom, $adresse, $ville, $cp){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        UPDATE utilisateur 
+        SET mail=:mail,
+            nom=:nom, 
+            prenom=:prenom,
+            adresse=:adresse,
+            ville=:ville,
+            cp=:cp,
+        WHERE id=:id;
+        ");
+        $req->bindParam(':id', $idUser);
+        $req->bindParam(':mail', $mail);
+        $req->bindParam(':nom', $nom);
+        $req->bindParam(':prenom', $prenom);
+        $req->bindParam(':adresse', $adresse);
+        $req->bindParam(':ville', $ville);
+        $req->bindParam(':cp', $cp);
+        $req->execute();
+    }
+
+    public static function getFactures($idUser){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        SELECT date, facturesPDF
+        FROM commande
+        WHERE idUtilisateur=:id
         ");
         $req->bindParam(':id', $idUser);
         $req->execute();
+        
+        return $req->fetchAll();
     }
+
 }
