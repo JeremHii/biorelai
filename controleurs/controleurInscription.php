@@ -1,6 +1,6 @@
 <?php
 
-//On vérifie tout un tas de condition et on créer inscrit l'utilisateur
+//On vérifie tout un tas de conditions et on inscrit l'utilisateur
 if(!isset($user)){
     if(isset($_POST['mail']) || isset($_POST['mdp']) || isset($_POST['Cmdp']) || isset($_POST['adresse']) || isset($_POST['desc']) || isset($_POST['cp']) || isset($_POST['nom']) || isset($_POST['prenom'])){
         if(isset($_POST['mail']) && isset($_POST['mdp']) && isset($_POST['Cmdp']) && isset($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['mail']) && !empty($_POST['mdp']) && !empty($_POST['Cmdp']) && !empty($_POST['nom']) && !empty($_POST['prenom']))
