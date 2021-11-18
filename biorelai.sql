@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 18 nov. 2021 à 00:06
+-- Généré le : jeu. 18 nov. 2021 à 23:39
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.6
 
@@ -51,7 +51,7 @@ CREATE TABLE `commande` (
   `idUtilisateur` int(11) NOT NULL,
   `date` date NOT NULL,
   `semaine` int(11) NOT NULL,
-  `facturesPDF` text
+  `facturesPDF` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -59,8 +59,8 @@ CREATE TABLE `commande` (
 --
 
 INSERT INTO `commande` (`id`, `idUtilisateur`, `date`, `semaine`, `facturesPDF`) VALUES
-(1, 2, '2021-11-16', 1, ''),
-(2, 3, '2021-11-12', 1, '');
+(1, 2, '2021-10-14', 1, NULL),
+(2, 3, '2021-10-16', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -101,8 +101,7 @@ CREATE TABLE `ligne_commande` (
 INSERT INTO `ligne_commande` (`produit`, `commande`, `quantite`) VALUES
 (1, 1, 1),
 (1, 2, 1),
-(4, 2, 10),
-(5, 1, 3);
+(4, 2, 10);
 
 -- --------------------------------------------------------
 
@@ -124,9 +123,10 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `nom`, `descriptif`, `unite`, `id_utilisateur`, `categorie`) VALUES
-(1, 'Carotte', 'La carotte douce', 'kg', 2, 1),
-(4, 'Patate', 'jsp mon reuf', 'kg', 2, 2),
-(5, 'Betterave', 'aucune desc', 'kg', 9, 1);
+(1, 'Carotte', 'La carotte douce', 'kg', 2, 2),
+(4, 'Patate', 'La patate de fou', 'kg', 2, 2),
+(7, 'Fraise', 'Les fraises sucrées', 'kg', 2, 1),
+(8, 'Banane', '', 'kg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -147,7 +147,8 @@ CREATE TABLE `semaine` (
 --
 
 INSERT INTO `semaine` (`numero`, `dateDebutProducteur`, `dateFinProducteur`, `dateFinClient`, `datevente`) VALUES
-(1, '2021-11-15', '2021-11-16', '2021-11-20', '2021-11-30');
+(1, '2021-10-13', '2021-10-14', '2021-10-20', '2021-10-15'),
+(2, '2021-11-18', '2021-11-22', '2021-11-26', '2021-11-22');
 
 -- --------------------------------------------------------
 
@@ -175,8 +176,7 @@ CREATE TABLE `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `mail`, `mdp`, `adresse`, `descriptif`, `cp`, `ville`, `nom`, `prenom`, `fonction`) VALUES
 (2, 'jeremydelmas@hotmail.com', '4f3c6735b6d5d7557775faead3e3b212', 'bordeaux', 'Producteur de pommes de terre en tout genre depuis des générations.', '33000', '', 'Delmas', 'Jeremy', 'PRD'),
 (3, 'pierre@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 'jen sais rien', 'Le tacos', '33000', 'pessac', 'Campmas', 'Pierre', 'ADH'),
-(8, 'gui@gmail.com', '202cb962ac59075b964b07152d234b70', 'rue du desespoir', 'lamort', '33700', 'Labas', 'Grandvoinet', 'Guillaume', 'RES'),
-(9, 'rgerg@gmai.com', '123', 'rgrg', 'gergerg', '33550', 'Parla', 'Tapis', 'Bernard', 'PRD');
+(8, 'gui@gmail.com', '202cb962ac59075b964b07152d234b70', 'rue du desespoir', 'lamort', '33700', 'Labas', 'Grandvoinet', 'Guillaume', 'RES');
 
 -- --------------------------------------------------------
 
@@ -197,7 +197,11 @@ CREATE TABLE `vente` (
 
 INSERT INTO `vente` (`produit`, `semaine`, `quantite`, `prix`) VALUES
 (1, 1, 10, '5.000'),
-(4, 1, 5, '1.000');
+(1, 2, 12, '4.000'),
+(4, 1, 5, '1.000'),
+(4, 2, 15, '3.000'),
+(7, 2, 8, '11.500'),
+(8, 2, 7, '6.000');
 
 --
 -- Index pour les tables déchargées
@@ -278,19 +282,19 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `semaine`
 --
 ALTER TABLE `semaine`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Contraintes pour les tables déchargées
