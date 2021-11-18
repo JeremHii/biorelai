@@ -23,6 +23,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
         $composant = "<table border='1'>
         <tr>
         <th>Nom</th>
+        <th>Catégorie</th>
         <th>Descriptif</th>
         <th>Quantité</th>
         <th>Supprimer</th>
@@ -33,6 +34,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
             $composant .= "<tr>";
             $composant .= "<td style='display: none;'>" . "<input type='hidden' name='id' value='" . $row['id'] . "'/>" . "</td>";
             $composant .= "<td>" . $row['nom'] . "</td>";
+            $composant .= "<td>" . $row['categorie'] . "</td>";
             $composant .= "<td>" . $row['descriptif'] . "</td>";
             $composant .= "<td>". $row['quantite']. "</td>";
             $composant .= "<td>" . "<input type='submit' id='suppPanier' value='Supprimer'>" . "</td>";

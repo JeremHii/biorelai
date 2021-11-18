@@ -1,13 +1,8 @@
 <?php
 if(isset($user) && $user->getFonction() == "ADH"){
-    //J'écris un message pour prévenir l'utilisateur
-    $messagePrevention = "Après avoir changé vos informations vous devez vous reconnecter";
 
     //Je créer un formulaire pour modif les infos de l'utilisateur
     $formulaireModif = new Formulaire('post', '?page=AdherentsMonCompteModif', 'fMonCompte', 'fMonCompte');
-
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerMessageAvecId($messagePrevention, "prevention"));
-    $formulaireModif->ajouterComposantTab();
 
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputHidden('id', 'id', $user->getId(), 0, '', ''));
     $formulaireModif->ajouterComposantTab();

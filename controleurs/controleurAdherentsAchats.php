@@ -4,16 +4,14 @@ if(isset($user) && $user->getFonction() == "ADH"){
     SemaineDAO::createSemaines();
     VenteDAO::createVentes();
     ProduitDAO::createProduits();
+    CategorieDAO::createCategories();
     if(SemaineDTO::getSemaineActive()->canAdherentBuy()){
-
-        //Le titre de la page
-        $titre = "<h1>Voici la liste des produits en vente</h1>";
-        echo $titre;
 
         //Je créer un tableau pour proposer toute les ventes
         $composant = "<table border='1'>
         <tr>
         <th>Nom</th>
+        <th>Catégorie</th>
         <th>Descriptif</th>
         <th>Prix</th>
         <th>Quantité disponible</th>
@@ -24,6 +22,9 @@ if(isset($user) && $user->getFonction() == "ADH"){
         //$liste = VenteDAO::getVenteSemaine();
         $liste = VenteDTO::getVentes();
         if(!empty($liste)){
+            //Le titre de la page
+            $titre = "<h1>Voici la liste des produits en vente</h1>";
+            echo $titre;
             //J'affiche cette liste
             foreach($liste as $row)
             {
@@ -32,6 +33,7 @@ if(isset($user) && $user->getFonction() == "ADH"){
                 $composant .= "<tr>";
                 $composant .= "<td style='display: none;'>" . "<input type='hidden' name='id' value='" . $produit->getId() . "'/>" . "</td>";
                 $composant .= "<td>" . "<input type='text' name='nom' class='AchatTab' value='" . $produit->getNom() . "'disabled/>" . "</td>";
+                $composant .= "<td>" . "<input type='text' name='categorie' class='AchatTab' value='" . CategorieDTO::getCategorie($produit->getCategorie())->getLibelle() . "'disabled/>" . "</td>";
                 $composant .= "<td>" . "<input type='text' name='desc' class='AchatTab' value='" . $produit->getDescriptif() . "'disabled/>" . "</td>";
                 $composant .= "<td>" . "<input type='text' name='prix' class='AchatTab' value='" . $row->getPrix() . "'disabled/>" . "</td>";
                 $composant .= "<td>" . "<input type='text' name='quantiteM' class='AchatTab' value='" . $row->getQuantite() . "'disabled/>" . "</td>";

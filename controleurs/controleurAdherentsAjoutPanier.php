@@ -8,25 +8,26 @@ if(isset($user) && $user->getFonction() == "ADH"){
         }
         //Je créer un objet produit
         ProduitDAO::createProduits();
+        //Je créer un objet Categorie
+        CategorieDAO::createCategories();
         $panier = unserialize($_SESSION['Panier']);
 
 
-        //J'ajoute l'élément a la variable de session
+        //Je met l'object produit dans une variable pour faciliter les traitements
         $var = ProduitDTO::getProduit($_POST['id']);
 
         //On regarde si le panier est pas vide pour ensuite le parcourir et vérifier si l'utilisateur ne met pas deux fois le même produits
-        if(!empty($panier)){
-            foreach($panier as $row){
-                if($row['nom'] == $var->getNom()){
-                    echo "<SCRIPT>alert('Vous avez déjà ce produits dans votre panier !')</SCRIPT>";
-                    echo "<SCRIPT>javascript:window.close()</SCRIPT>";
-                }
-                else{
-                    array_push($panier, array("id"=>$_POST['id'], "nom"=>$var->getNom(), "descriptif"=>$var->getDescriptif(), "quantite"=>$_POST['quantite']));
-                }
+        $cancel = false;
+        foreach($panier as $row){
+            if($row['nom'] == $var->getNom()){
+                echo "<SCRIPT>alert('Vous avez déjà ce produits dans votre panier !')</SCRIPT>";
+                echo "<SCRIPT>javascript:window.close()</SCRIPT>";
+                $cancel = true;
             }
-        }else{
-            array_push($panier, array("id"=>$_POST['id'], "nom"=>$var->getNom(), "descriptif"=>$var->getDescriptif(), "quantite"=>$_POST['quantite']));
+        }
+
+        if($cancel == false){
+            array_push($panier, array("id"=>$_POST['id'], "nom"=>$var->getNom(), "descriptif"=>$var->getDescriptif(), "quantite"=>$_POST['quantite'], "categorie"=>CategorieDTO::getCategorie($var->getCategorie())->getLibelle()));
         }
         
         //Je re serialize le panier
