@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Bio Relai</title>
-		<base href="http://localhost/" target="_blank">
+		<base href="<?=settings::$BASE_URL?>" target="_blank">
 		<link rel="stylesheet" href="styles/style.css">
 	</head>
 	<body>

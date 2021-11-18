@@ -1,9 +1,9 @@
 <?php
 class settings{
-    static $BASE_URL = "http://10.100.0.5/~jdelmas/biorelai/";
+    static $BASE_URL = "http://localhost";
 
-    static $DB_HOST = "10.100.0.5";
+    static $DB_HOST = "localhost";
     static $DB_NAME = "biorelai";
-    static $DB_USERNAME = "jdelmas";
-    static $DB_PASSWORD = "jdelmas";
+    static $DB_USERNAME = "root";
+    static $DB_PASSWORD = "";
 }
