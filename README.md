@@ -10,13 +10,13 @@ Pour modifier les paramètres (db, url de base) c'est dans `lib/settings.php`
 ## Connexions
 
 ### Adhérent
-> - Mail : pierre@gmail.com
-> - Pass : test
+- Mail : `pierre@gmail.com`
+- Pass : `test`
 
 ### Producteur
-> - Mail : jeremy@gmail.com
-> - Pass : jerem
+- Mail : `jeremy@gmail.com`
+- Pass : `jerem`
 
 ### Bio relai
-> - Mail : gui@gmail.com
-> - Pass : 123
+- Mail : `gui@gmail.com`
+- Pass : `123`
