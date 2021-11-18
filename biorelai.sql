@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 18 nov. 2021 à 23:39
+-- Généré le : jeu. 18 nov. 2021 à 23:47
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.6
 
@@ -174,7 +174,7 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `mail`, `mdp`, `adresse`, `descriptif`, `cp`, `ville`, `nom`, `prenom`, `fonction`) VALUES
-(2, 'jeremydelmas@hotmail.com', '4f3c6735b6d5d7557775faead3e3b212', 'bordeaux', 'Producteur de pommes de terre en tout genre depuis des générations.', '33000', '', 'Delmas', 'Jeremy', 'PRD'),
+(2, 'jeremy@gmail.com', 'b2882c4cc48ae096d95e23b933930a2a', 'bordeaux', 'Producteur de pommes de terre en tout genre depuis des générations.', '33000', '', 'Delmas', 'Jeremy', 'PRD'),
 (3, 'pierre@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 'jen sais rien', 'Le tacos', '33000', 'pessac', 'Campmas', 'Pierre', 'ADH'),
 (8, 'gui@gmail.com', '202cb962ac59075b964b07152d234b70', 'rue du desespoir', 'lamort', '33700', 'Labas', 'Grandvoinet', 'Guillaume', 'RES');
 
