@@ -13,23 +13,25 @@ class ProduitDAO{
   
     public static function updateProduit(ProduitDTO $produit){
         $db = Db::getDb();
-        $req = $db->prepare("UPDATE produit SET nom = ?, descriptif = ?, unite = ? WHERE id = ?");
+        $req = $db->prepare("UPDATE produit SET nom = ?, descriptif = ?, unite = ?, categorie = ? WHERE id = ?");
         $req->execute(array(
             $produit->getNom(),
             $produit->getDescriptif(),
             $produit->getUnite(),
+            $produit->getCategorie(),
             $produit->getId()
         ));
     }
 
     public static function addProduit(ProduitDTO $produit){
         $db = Db::getDb();
-        $req = $db->prepare("INSERT INTO produit(nom, descriptif, unite, id_utilisateur) VALUES (?, ?, ?, ?)");
+        $req = $db->prepare("INSERT INTO produit(nom, descriptif, unite, id_utilisateur, categorie) VALUES (?, ?, ?, ?, ?)");
         $req->execute(array(
             $produit->getNom(),
             $produit->getDescriptif(),
             $produit->getUnite(),
-            $produit->getId_utilisateur()
+            $produit->getId_utilisateur(),
+            $produit->getCategorie()
         ));
     }
 

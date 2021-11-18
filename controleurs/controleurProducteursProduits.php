@@ -5,13 +5,15 @@ if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
 //On créé les objets DTO nécessaires
 ProduitDAO::createProduits();
+CategorieDAO::createCategories();
 
-$produitsTableau = new Table(array("N°", "Nom", "Descriptif", "Unite", "", ""));
+$produitsTableau = new Table(array("N°", "Catégorie", "Nom", "Descriptif", "Unite", "", ""));
 
 foreach (ProduitDTO::getProduits() as $produit) {
     if($produit->getId_utilisateur() == $user->getId()){
         $produitsTableau->addRow(array(
             $produit->getId(),
+            CategorieDTO::getCategorie($produit->getCategorie())->getLibelle(),
             $produit->getNom(),
             $produit->getDescriptif(),
             $produit->getUnite(),

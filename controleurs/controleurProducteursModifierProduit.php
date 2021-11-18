@@ -5,6 +5,8 @@ if(!isset($user) || $user->getFonction() != "PRD") header("Location: /");
 
 //On créé les objets DTO nécessaires
 ProduitDAO::createProduits();
+CategorieDAO::createCategories();
+
 //Si le produit renseigné existe bien et appartient bien au producteur
 if(!isset($_GET["produit"]) || ProduitDTO::getProduit($_GET["produit"]) == null || ProduitDTO::getProduit($_GET["produit"])->getId_utilisateur() != $user->getId()) header("Location: ?page=producteursProduits");
 
@@ -13,11 +15,12 @@ $message = "";
 
 //Formulaire envoyé
 if(isset($_POST["confirm"])){
-    if(isset($_POST["nom"]) && isset($_POST["description"]) && isset($_POST["unite"])){
+    if(isset($_POST["nom"]) && isset($_POST["description"]) && isset($_POST["unite"]) && isset($_POST["categorie"])){
         //On modifie l'objet produit et on l'update dans la bdd
         $produit->setNom($_POST["nom"]);
         $produit->setDescriptif($_POST["description"]);
         $produit->setUnite($_POST["unite"]);
+        $produit->setCategorie($_POST["categorie"]);
         ProduitDAO::updateProduit($produit);
         
         $message = "Le produit a été modifié !";
@@ -48,6 +51,21 @@ $form->ajouterComposantTab();
 $form->ajouterComposantLigne($form->creerLabel("Unite"));
 $form->ajouterComposantTab();
 $form->ajouterComposantLigne($form->creerInputTexte('unite', 'unite', $produit->getUnite(), 0, '', ''));
+$form->ajouterComposantTab();
+
+
+$form->ajouterComposantLigne($form->creerEspace());
+$form->ajouterComposantTab();
+
+$form->ajouterComposantLigne($form->creerLabel("Catégorie"));
+$form->ajouterComposantTab();
+
+$selectCategories = new Select("categorie");
+foreach (CategorieDTO::getCategories() as $categorie) {
+    $selectCategories->addOption(new SelectOption($categorie->getcode(), $categorie->getLibelle(), $produit->getCategorie() == $categorie->getCode()));
+}
+
+$form->ajouterComposantLigne($selectCategories);
 $form->ajouterComposantTab();
 
 $form->ajouterComposantLigne($form->creerEspace());

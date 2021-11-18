@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 17 nov. 2021 à 22:58
+-- Généré le : jeu. 18 nov. 2021 à 00:06
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.6
 
@@ -31,6 +31,14 @@ CREATE TABLE `categorie` (
   `code` int(11) NOT NULL,
   `libelle` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `categorie`
+--
+
+INSERT INTO `categorie` (`code`, `libelle`) VALUES
+(1, 'Fruit'),
+(2, 'Légume');
 
 -- --------------------------------------------------------
 
@@ -116,9 +124,9 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `nom`, `descriptif`, `unite`, `id_utilisateur`, `categorie`) VALUES
-(1, 'Carotte', 'La carotte douce', 'kg', 2, 0),
-(4, 'Patate', 'jsp mon reuf', 'kg', 2, 0),
-(5, 'Betterave', 'aucune desc', 'kg', 9, 0);
+(1, 'Carotte', 'La carotte douce', 'kg', 2, 1),
+(4, 'Patate', 'jsp mon reuf', 'kg', 2, 2),
+(5, 'Betterave', 'aucune desc', 'kg', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -139,7 +147,7 @@ CREATE TABLE `semaine` (
 --
 
 INSERT INTO `semaine` (`numero`, `dateDebutProducteur`, `dateFinProducteur`, `dateFinClient`, `datevente`) VALUES
-(1, '2021-11-15', '2021-11-18', '2021-11-20', '2021-11-30');
+(1, '2021-11-15', '2021-11-16', '2021-11-20', '2021-11-30');
 
 -- --------------------------------------------------------
 
@@ -166,7 +174,7 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`id`, `mail`, `mdp`, `adresse`, `descriptif`, `cp`, `ville`, `nom`, `prenom`, `fonction`) VALUES
 (2, 'jeremydelmas@hotmail.com', '4f3c6735b6d5d7557775faead3e3b212', 'bordeaux', 'Producteur de pommes de terre en tout genre depuis des générations.', '33000', '', 'Delmas', 'Jeremy', 'PRD'),
-(3, 'pierre@gmail.com', '098f6bcd4621d373cade4e832627b4f6', '14 rue robert', 'Le tacos', '33600', 'Pessac', 'Campmas', 'Pierre', 'ADH'),
+(3, 'pierre@gmail.com', '098f6bcd4621d373cade4e832627b4f6', 'jen sais rien', 'Le tacos', '33000', 'pessac', 'Campmas', 'Pierre', 'ADH'),
 (8, 'gui@gmail.com', '202cb962ac59075b964b07152d234b70', 'rue du desespoir', 'lamort', '33700', 'Labas', 'Grandvoinet', 'Guillaume', 'RES'),
 (9, 'rgerg@gmai.com', '123', 'rgrg', 'gergerg', '33550', 'Parla', 'Tapis', 'Bernard', 'PRD');
 
@@ -182,6 +190,14 @@ CREATE TABLE `vente` (
   `quantite` int(11) NOT NULL,
   `prix` decimal(15,3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `vente`
+--
+
+INSERT INTO `vente` (`produit`, `semaine`, `quantite`, `prix`) VALUES
+(1, 1, 10, '5.000'),
+(4, 1, 5, '1.000');
 
 --
 -- Index pour les tables déchargées
@@ -219,7 +235,8 @@ ALTER TABLE `ligne_commande`
 --
 ALTER TABLE `produit`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `produit_utilisateur_FK` (`id_utilisateur`);
+  ADD KEY `produit_utilisateur_FK` (`id_utilisateur`),
+  ADD KEY `produit_categorie_FK` (`categorie`);
 
 --
 -- Index pour la table `semaine`
@@ -249,7 +266,7 @@ ALTER TABLE `vente`
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
@@ -261,7 +278,7 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `semaine`
@@ -297,6 +314,7 @@ ALTER TABLE `ligne_commande`
 -- Contraintes pour la table `produit`
 --
 ALTER TABLE `produit`
+  ADD CONSTRAINT `produit_categorie_FK` FOREIGN KEY (`categorie`) REFERENCES `categorie` (`code`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `produit_utilisateur_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
