@@ -3,10 +3,8 @@
 class Db{
     public static function getDb(){
 
-        $dsn = "mysql:host=localhost;dbname=biorelai;charset=utf8";
-        $username = "root";
-        $password = "";
-        $db = new PDO($dsn, $username, $password);
+        $dsn = "mysql:host=" . settings::$DB_HOST . ";dbname=" . settings::$DB_NAME . ";charset=utf8";
+        $db = new PDO($dsn, settings::$DB_USERNAME, settings::$DB_PASSWORD);
         return $db;
     }
 }
