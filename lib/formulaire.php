@@ -52,7 +52,7 @@ class Formulaire{
 	}
 	
 	
-	public function creerInputDate($unNom, $unId, $uneValue , $required, $disabled = false){
+	public function creerInputDate($unNom, $unId, $uneValue , $required = 1, $disabled = false){
 		$composant = "<input type = 'date' name = '" . $unNom . "' id = '" . $unId . "' ";
 		if (!empty($uneValue)){
 			$composant .= "value = '" . $uneValue . "' ";

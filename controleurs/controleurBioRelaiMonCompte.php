@@ -1,37 +1,18 @@
 <?php
 if(isset($user) && $user->getFonction() == "RES"){
-
-    $messageErreurConnexion = "";
-    if(isset($_POST['mail']) && isset($_POST['mdp']) && isset($_POST['cmdp']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['cp']) && isset($_POST['desc'])){
-        if($_POST['mail'] != $user->getMail() && !empty($_POST['mail'])){
-            UserDAO::changeMail($user->getId(), $_POST['mail']);
-
-            $userDTO = new UserDTO();
-            $userDTO->hydrate($userDAO);
-            $_SESSION['identification'] = serialize($userDTO);
-            $user = unserialize($_SESSION['identification']);
-        }
-        elseif(isset($_POST['mdp']) && isset($_POST['cmdp'])){
     
-        }
-    }
-    else{
-        $messageErreurConnexion = "test";
-    }
+    $messagePrevention = "Après avoir changé vos informations vous devez vous reconnecter";
 
+    $formulaireModif = new Formulaire('post', '?page=BioRelaiMonCompteModif', 'fMonCompte', 'fMonCompte');
 
-    $formulaireModif = new Formulaire('post', '?page=AdherentsMonCompte', 'fMonCompte', 'fMonCompte');
+    $formulaireModif->ajouterComposantLigne($formulaireModif->creerMessageAvecId($messagePrevention, "prevention"));
+    $formulaireModif->ajouterComposantTab();
+
+    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputHidden('id', 'id', $user->getId(), 0, '', ''));
+    $formulaireModif->ajouterComposantTab();
 
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Mail :'));
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('mail', 'mail', $user->getMail(), 0, '', ''));
-    $formulaireModif->ajouterComposantTab();
-
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre mot de passe :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputMdp('mdp', 'mdp',  0, '*************', ''));
-    $formulaireModif->ajouterComposantTab();
-
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Confirmez votre mot de passe :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputMdp('cmdp', 'cmdp',  0, '*************', ''));
     $formulaireModif->ajouterComposantTab();
 
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre Nom :'));
@@ -39,7 +20,7 @@ if(isset($user) && $user->getFonction() == "RES"){
     $formulaireModif->ajouterComposantTab();
     
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre prenom :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('nom', 'nom', $user->getPrenom(), 0,'', ''));
+    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('prenom', 'prenom', $user->getPrenom(), 0,'', ''));
     $formulaireModif->ajouterComposantTab();
 
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre adresse :'));
@@ -54,10 +35,6 @@ if(isset($user) && $user->getFonction() == "RES"){
     $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('cp', 'cp', $user->getCp(), 0,'', ''));
     $formulaireModif->ajouterComposantTab();
 
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerLabel('Changez votre descriptif :'));
-    $formulaireModif->ajouterComposantLigne($formulaireModif->creerInputTexte('desc', 'desc', $user->getDescriptif(), 0,'', ''));
-    $formulaireModif->ajouterComposantTab();
-
     $formulaireModif->ajouterComposantLigne($formulaireModif-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
     $formulaireModif->ajouterComposantTab();
 
@@ -66,7 +43,19 @@ if(isset($user) && $user->getFonction() == "RES"){
 
     $formulaireModif->creerFormulaire();
 
-    $formulaireSupp = new Formulaire('post', '?page=AdherentsSuppMonCompte', 'fMonCompte', 'fMonCompte');
+    $formulaireModifCompteMdp = new Formulaire('post', '?page=BioRelaiMonCompteMDP', 'fMonCompte', 'fMonCompte');
+
+    $formulaireModifCompteMdp->ajouterComposantLigne($formulaireModifCompteMdp-> creerInputSubmit('submitModifmdp', 'submitModifmdp', 'Modifier votre mot de passe'));
+    $formulaireModifCompteMdp->ajouterComposantTab();
+
+    $formulaireModifCompteMdp->creerFormulaire();
+
+    $messagePreventionSupp = "Attention la suppression du compte est définitive, impossible de revenir en arrière";
+
+    $formulaireSupp = new Formulaire('post', '?page=BioRelaiSuppMonCompte', 'fMonCompte', 'fMonCompte');
+
+    $formulaireSupp->ajouterComposantLigne($formulaireSupp->creerMessageAvecId($messagePreventionSupp, "prevention"));
+    $formulaireSupp->ajouterComposantTab();
 
     $formulaireSupp->ajouterComposantLigne($formulaireSupp-> creerInputSubmit('submitSupp', 'submitSupp', 'Supprimer votre compte'));
     $formulaireSupp->ajouterComposantTab();

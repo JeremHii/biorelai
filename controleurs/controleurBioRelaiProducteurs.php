@@ -30,39 +30,39 @@ if(isset($user) && $user->getFonction() == "RES"){
 $formulaireInscription = new Formulaire('post', '?page=BioRelaiProducteurs', 'fInscription', 'fInscription');
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Mail :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('mail', 'mail', '', 1, 'Entrez votre mail...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('mail', 'mail', '', 1, 'Entrez le mail...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Mot de Passe :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputMdp('mdp', 'mdp',  1, 'Entrez votre mot de passe...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputMdp('mdp', 'mdp',  1, 'Entrez le mot de passe...', ''));
 $formulaireInscription->ajouterComposantTab();
 
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Confirmez votre mot de Passe :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputMdp('Cmdp', 'Cmdp',  1, 'Confirmez votre mot de passe...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Confirmez le mot de Passe :'));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputMdp('Cmdp', 'Cmdp',  1, 'Confirmez le mot de passe...', ''));
 $formulaireInscription->ajouterComposantTab();
 
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Votre adresse :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('adresse', 'adresse', '',  1, 'Entrez votre adresse...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel("L'adresse :"));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('adresse', 'adresse', '',  1, 'Entrez son adresse...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Descriptif :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('desc', 'desc', '',  1, 'Entrez votre description...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('desc', 'desc', '',  1, 'Entrez sa description...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Code postal :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('cp', 'cp', '',  1, 'Entrez votre code postal...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('cp', 'cp', '',  1, 'Entrez son code postal...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Ville :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('ville', 'ville', '',  1, 'Entrez votre ville...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('ville', 'ville', '',  1, 'Entrez sa ville...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Nom :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('nom', 'nom', '',  1, 'Entrez votre nom...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('nom', 'nom', '',  1, 'Entrez son nom...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Prénom :'));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('prenom', 'prenom', '',  1, 'Entrez votre prénom...', ''));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('prenom', 'prenom', '',  1, 'Entrez son prénom...', ''));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription-> creerInputSubmit('submitConnex', 'submitConnex', 'Valider'));
@@ -76,13 +76,13 @@ $formulaireInscription->creerFormulaire();
 UserDAO::createUsers();
 
 $tableauProducteurs = new Table(array("Nom", "Prenom"));
-foreach (UserDTO::getUsers() as $user) {
-    if($user->getFonction() == "PRD"){
-        $tableauProducteurs->addRow(array(
-            $user->getNom(),
-            $user->getPrenom()
-        ));
-    }
+foreach (ResponsableDAO::getUsers() as $user) {
+    $tableauProducteurs->addRow(array(
+        $user["nom"],
+        $user["prenom"],
+        new TableLink("Modifier", "?page=BioRelaiModifProducteur&producteur=" . $user["id"]),
+        new TableLink("Supprimer", "?page=BioRelaiSuppProducteur&producteur=" . $user["id"])
+    ));
 }
 
 require_once 'vue/bioRelai/vueBioRelaiProducteurs.php';

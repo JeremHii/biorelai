@@ -78,4 +78,49 @@ class UserDAO{
             $user->getId()
         ));
     }
+
+    public static function SuppUtilisateur($idUser){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        DELETE FROM utilisateur
+        WHERE id=:id
+        ");
+        $req->bindParam(':id', $idUser);
+        $req->execute();
+    }
+
+    public static function changeMdp($idUser, $mdp){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        UPDATE utilisateur 
+        SET mdp=:mdp
+        WHERE id=:id;
+        ");
+        $req->bindParam(':id', $idUser);
+        $req->bindParam(':mdp', $mdp);
+        $req->execute();
+    }
+
+    public static function changeModif($idUser, $mail, $nom, $prenom, $adresse, $ville, $cp){
+        $db = Db::getDb();
+        $req = $db->prepare("
+        UPDATE utilisateur 
+        SET mail=:mail,
+            nom=:nom, 
+            prenom=:prenom,
+            adresse=:adresse,
+            ville=:ville,
+            cp=:cp
+        WHERE id=:id;
+        ");
+        $req->bindParam(':id', $idUser);
+        $req->bindParam(':mail', $mail);
+        $req->bindParam(':nom', $nom);
+        $req->bindParam(':prenom', $prenom);
+        $req->bindParam(':adresse', $adresse);
+        $req->bindParam(':ville', $ville);
+        $req->bindParam(':cp', $cp);
+        $req->execute();
+    }
+
 }
