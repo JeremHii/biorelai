@@ -103,7 +103,7 @@ class TableLink{
     private $link;
     private $target;
 
-    public function __construct(string $text, string $link, string $target = "_self")
+    public function __construct(string $text, $link, string $target = "_self")
     {
         $this->text = $text;
         $this->link = $link;

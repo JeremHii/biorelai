@@ -11,7 +11,7 @@ foreach(CommandeDTO::getCommandes() as $commande){
             $user->getNom() . " " . $user->getPrenom(),
             $commande->getDate(),
             $commande->getSemaine(),
-            new TableLink($commande->getFacturesPDF(), "Afficher"),
+            new TableLink("Afficher",$commande->getFacturesPDF()),
         ));
     }
 }
