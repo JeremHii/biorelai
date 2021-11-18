@@ -7,9 +7,20 @@ if(!isset($user)){
         {   
             if($_POST['mdp'] == $_POST['Cmdp'])
             {
-                if(UserDAO::userExists($_POST['mail']))
+                if(!UserDAO::userExists($_POST['mail']))
                 {
-                    UserDAO::createUser($_POST['mail'], md5($_POST['mdp']), $_POST['adresse'], $_POST['cp'], $_POST['ville'] ,$_POST['nom'],  $_POST['prenom']);
+                    $newUser = new UserDTO();
+                    $newUser->setMail($_POST['mail']);
+                    $newUser->setAdresse($_POST['adresse']);
+                    $newUser->setCp($_POST['cp']);
+                    $newUser->setVille($_POST['ville']);
+                    $newUser->setNom($_POST['nom']);
+                    $newUser->setPrenom($_POST['prenom']);
+                    $newUser->setFonction("ADH");
+                    UserDAO::addUser($newUser, $_POST['mdp']);
+
+                    $_SESSION["identification"] = serialize($newUser);
+                    header("Location: ?");
                 }
                 else
                 {

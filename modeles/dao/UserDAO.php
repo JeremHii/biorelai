@@ -24,34 +24,36 @@ class UserDAO{
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function createUser($mail, $mdp, $adresse, $cp, $ville, $nom, $prenom, $fonction="ADH"){
+    public static function addUser(UserDTO $user, $mdp){
         $db = Db::getDb();
         $req = $db->prepare("
-        INSERT INTO utilisateur(mail, mdp, adresse, cp, ville, nom, prenom, fonction)
-        VALUES (:mail, :mdp, :adresse, :cp, :ville, :nom, :prenom, :fonction);
+        INSERT INTO utilisateur(mail, mdp, adresse, descriptif, cp, ville, nom, prenom, fonction)
+        VALUES (?, md5(?), ?, ?, ?, ?, ?, ?, ?);
         ");
-        $req->bindParam(':mail', $mail);
-        $req->bindParam(':mdp', $mdp);
-        $req->bindParam(':adresse', $adresse);
-        $req->bindParam(':cp', $cp);
-        $req->bindParam(':ville', $ville);
-        $req->bindParam(':nom', $nom);
-        $req->bindParam(':prenom', $prenom);
-        $req->bindParam(':fonction', $fonction);
 
-        $req->execute();
+        $req->execute(array(
+            $user->getMail(),
+            $mdp,
+            $user->getAdresse(),
+            $user->getDescriptif(),
+            $user->getCp(),
+            $user->getVille(),
+            $user->getNom(),
+            $user->getPrenom(),
+            $user->getFonction()
+        ));
     }
 
     public static function userExists($mail){
         $db = Db::getDb();
         $req = $db->prepare("
-        SELECT count(mail)
+        SELECT count(*) > 0 AS doesExists
         FROM utilisateur
         WHERE mail = ?
         ");
         $req->execute(array($mail));
         
-        return $req->fetch(PDO::FETCH_ASSOC);
+        return $req->fetch(PDO::FETCH_ASSOC)["doesExists"] == 1;
     }
 
     public static function updateUser(UserDTO $user){
@@ -79,14 +81,12 @@ class UserDAO{
         ));
     }
 
-    public static function SuppUtilisateur($idUser){
+    public static function deleteUser(UserDTO $user){
         $db = Db::getDb();
-        $req = $db->prepare("
-        DELETE FROM utilisateur
-        WHERE id=:id
-        ");
-        $req->bindParam(':id', $idUser);
-        $req->execute();
+        $req = $db->prepare("DELETE FROM utilisateur WHERE id = ?");
+        $req->execute(array(
+            $user->getId()
+        ));
     }
 
     public static function changeMdp($idUser, $mdp){

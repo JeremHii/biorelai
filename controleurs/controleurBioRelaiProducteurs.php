@@ -7,9 +7,21 @@ if(isset($user) && $user->getFonction() == "RES"){
         {   
             if($_POST['mdp'] == $_POST['Cmdp'])
             {
-                if(UserDAO::userExists($_POST['mail']))
+                if(!UserDAO::userExists($_POST['mail']))
                 {
-                    UserDAO::createUser($_POST['mail'], $_POST['mdp'], $_POST['adresse'], $_POST['desc'], $_POST['cp'], $_POST['ville'] ,$_POST['nom'],  $_POST['prenom'], "PRD");
+
+                    $newUser = new UserDTO();
+                    $newUser->setMail($_POST['mail']);
+                    $newUser->setAdresse($_POST['adresse']);
+                    $newUser->setDescriptif($_POST['desc']);
+                    $newUser->setCp($_POST['cp']);
+                    $newUser->setVille($_POST['ville']);
+                    $newUser->setNom($_POST['nom']);
+                    $newUser->setPrenom($_POST['prenom']);
+                    $newUser->setFonction("PRD");
+                    UserDAO::addUser($newUser, $_POST['mdp']);
+
+                    //header("Location: ?page=BioRelaiProducteurs");
                 }
                 else
                 {

@@ -1,6 +1,6 @@
 <?php
 if(!empty($user) && $user->getFonction() == "RES"){
-    UserDAO::SuppUtilisateur($user->getId());
+    UserDAO::deleteUser($user);
     header('Location: ?page=Deconnexion');
 }
 else
