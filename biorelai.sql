@@ -51,7 +51,7 @@ CREATE TABLE `commande` (
   `idUtilisateur` int(11) NOT NULL,
   `date` date NOT NULL,
   `semaine` int(11) NOT NULL,
-  `facturesPDF` text NOT NULL
+  `facturesPDF` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
